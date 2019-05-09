@@ -21,7 +21,7 @@
         <td>${device.type.name}</td>
         <td>${device.ready}</td>
         <td>${device.factoryNumber}</td>
-        <td>${device.owner.abbr}</td>
+        <td>${device.superior.abbr}</td>
         <td>${device.airfield.abbr}</td>
     </tr>
 </table>

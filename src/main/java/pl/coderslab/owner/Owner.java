@@ -12,7 +12,7 @@ public class Owner {
     private String name;
     private String abbr;
     @ManyToOne
-    private Owner owner;
+    private Owner superior;
 
     public Owner() {
     }
@@ -41,12 +41,12 @@ public class Owner {
         this.abbr = abbr;
     }
 
-    public Owner getOwner() {
-        return owner;
+    public Owner getSuperior() {
+        return superior;
     }
 
-    public void setOwner(Owner owner) {
-        this.owner = owner;
+    public void setSuperior(Owner superior) {
+        this.superior = superior;
     }
 }
 

@@ -10,5 +10,6 @@
 <a href="/device/">All devices</a><br>
 <a href="/device/groupByType">All devices group by type</a><br>
 <a href="/device/groupByTypeOrderByGroup">All devices group by type order by group</a><br>
+<a href="/device/pivotTable">Pivot table</a><br>
 </body>
 </html>

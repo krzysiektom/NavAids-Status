@@ -19,12 +19,12 @@
         <tr>
             <td colspan="5">${group.name}</td>
         </tr>
-        <c:forEach items="${typeRepository.findAllByGroup(group)}" var="type">
+        <c:forEach items="${deviceService.findAllTypesByGroup(group)}" var="type">
             <tr>
                 <td>${type.name}</td>
-                <td>${deviceRepository.countByType(type)}</td>
-                <td>${deviceRepository.countByTypeAndReadyTrue(type)}</td>
-                <td>${deviceRepository.countByTypeAndReadyFalse(type)}</td>
+                <td>${deviceService.countByType(type)}</td>
+                <td>${deviceService.countByTypeAndReadyTrue(type)}</td>
+                <td>${deviceService.countByTypeAndReadyFalse(type)}</td>
                 <td><a href="/device/type/${type.id}">Details</a></td>
             </tr>
         </c:forEach>
