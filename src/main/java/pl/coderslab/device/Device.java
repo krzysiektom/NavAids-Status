@@ -1,6 +1,8 @@
 package pl.coderslab.device;
 
 import org.hibernate.validator.constraints.NotBlank;
+import pl.coderslab.airfield.Airfield;
+import pl.coderslab.owner.Owner;
 import pl.coderslab.type.Type;
 
 import javax.persistence.*;
@@ -18,7 +20,13 @@ public class Device {
     @NotBlank
     private String factoryNumber;
 
-    private boolean status;
+    private boolean ready;
+
+    @ManyToOne
+    private Airfield airfield;
+
+    @ManyToOne
+    private Owner owner;
 
     public Device() {
     }
@@ -47,11 +55,27 @@ public class Device {
         this.factoryNumber = factoryNumber;
     }
 
-    public boolean isStatus() {
-        return status;
+    public boolean isReady() {
+        return ready;
     }
 
-    public void setStatus(boolean status) {
-        this.status = status;
+    public void setReady(boolean ready) {
+        this.ready = ready;
+    }
+
+    public Airfield getAirfield() {
+        return airfield;
+    }
+
+    public void setAirfield(Airfield airfield) {
+        this.airfield = airfield;
+    }
+
+    public Owner getOwner() {
+        return owner;
+    }
+
+    public void setOwner(Owner owner) {
+        this.owner = owner;
     }
 }

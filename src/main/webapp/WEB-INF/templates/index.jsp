@@ -7,6 +7,8 @@
     <title>Home</title>
 </head>
 <body>
-<a>Work</a>
+<a href="/device/">All devices</a><br>
+<a href="/device/groupByType">All devices group by type</a><br>
+<a href="/device/groupByTypeOrderByGroup">All devices group by type order by group</a><br>
 </body>
 </html>
