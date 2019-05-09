@@ -1,13 +1,13 @@
-package pl.coderslab.group;
+package pl.coderslab.type;
 
 import org.hibernate.validator.constraints.NotBlank;
+import pl.coderslab.group.Group;
 
 import javax.persistence.*;
 
 @Entity
-@Table(name = "groups")
-public class group {
-
+@Table(name = "types")
+public class Type {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -15,10 +15,10 @@ public class group {
     @NotBlank
     private String name;
 
-    @NotBlank
-    private String abbr;
+    @ManyToOne
+    private Group group;
 
-    public group() {
+    public Type() {
     }
 
     public Long getId() {
@@ -37,11 +37,11 @@ public class group {
         this.name = name;
     }
 
-    public String getAbbr() {
-        return abbr;
+    public Group getGroup() {
+        return group;
     }
 
-    public void setAbbr(String abbr) {
-        this.abbr = abbr;
+    public void setGroup(Group group) {
+        this.group = group;
     }
 }
