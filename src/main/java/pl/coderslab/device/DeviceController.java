@@ -6,25 +6,13 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
-import pl.coderslab.airfield.AirfieldRepository;
-import pl.coderslab.group.GroupRepository;
-import pl.coderslab.owner.OwnerRepository;
 import pl.coderslab.type.Type;
-import pl.coderslab.type.TypeRepository;
 
 @Controller
 @RequestMapping("device")
 public class DeviceController {
     @Autowired
     DeviceService deviceService;
-    @Autowired
-    TypeRepository typeRepository;
-    @Autowired
-    GroupRepository groupRepository;
-    @Autowired
-    OwnerRepository ownerRepository;
-    @Autowired
-    AirfieldRepository airfieldRepository;
 
     @GetMapping("/")
     public String allDevices(Model model) {
@@ -40,14 +28,28 @@ public class DeviceController {
 
     @GetMapping("/groupByType")
     public String allDevicesGroupByType(Model model) {
-        model.addAttribute("types", typeRepository.findAll());
+        model.addAttribute("types", deviceService.findAllTypes());
         model.addAttribute("deviceService", deviceService);
         return "allDevicesGroupByType";
     }
 
+    @GetMapping("/groupByOwner")
+    public String allDevicesGroupByOwner(Model model) {
+        model.addAttribute("owners", deviceService.findAllOwners());
+        model.addAttribute("deviceService", deviceService);
+        return "allDevicesGroupByOwner";
+    }
+
+    @GetMapping("/groupByAirfield")
+    public String allDevicesGroupByAirfield(Model model) {
+        model.addAttribute("airfields", deviceService.findAllAirfields());
+        model.addAttribute("deviceService", deviceService);
+        return "allDevicesGroupByAirfield";
+    }
+
     @GetMapping("type/{id}")
     public String devicesByType(@PathVariable("id") Long id, Model model) {
-        Type type = typeRepository.findOne(id);
+        Type type = deviceService.findTypeById(id);
         model.addAttribute("type", type);
         model.addAttribute("allDevices", deviceService.findAllByType(type));
         return "devicesByType";
@@ -55,15 +57,15 @@ public class DeviceController {
 
     @GetMapping("/groupByTypeOrderByGroup")
     public String allDevicesGroupByTypeOrderByGroup(Model model) {
-        model.addAttribute("groups", groupRepository.findAll());
+        model.addAttribute("groups", deviceService.findAllGroups());
         model.addAttribute("deviceService", deviceService);
         return "allDevicesGroupByTypeOrderByGroup";
     }
 
     @GetMapping("/pivotTable")
     public String pivotTable(Model model) {
-        model.addAttribute("groups", groupRepository.findAll());
-        model.addAttribute("superiors", ownerRepository.findAllBySuperior(ownerRepository.findOne(1L)));
+        model.addAttribute("groups", deviceService.findAllGroups());
+        model.addAttribute("superiors", deviceService.findAllSuperiors());
         model.addAttribute("deviceService", deviceService);
         return "pivotTableDevicesByTypesAndOwners";
     }

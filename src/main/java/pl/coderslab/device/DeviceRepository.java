@@ -1,6 +1,7 @@
 package pl.coderslab.device;
 
 import org.springframework.data.jpa.repository.JpaRepository;
+import pl.coderslab.airfield.Airfield;
 import pl.coderslab.owner.Owner;
 import pl.coderslab.type.Type;
 
@@ -19,4 +20,7 @@ public interface DeviceRepository extends JpaRepository<Device, Long> {
 
     Long countByOwnerAndTypeAndReadyTrue(Owner owner, Type type);
 
+    List<Device> findAllByOwner(Owner owner);
+
+    List<Device> findAllByAirfield(Airfield airfield);
 }

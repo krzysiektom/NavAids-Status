@@ -9,6 +9,8 @@
 <body>
 <a href="/device/">All devices</a><br>
 <a href="/device/groupByType">All devices group by type</a><br>
+<a href="/device/groupByOwner">All devices group by owner</a><br>
+<a href="/device/groupByAirfield">All devices group by airfield</a><br>
 <a href="/device/groupByTypeOrderByGroup">All devices group by type order by group</a><br>
 <a href="/device/pivotTable">Pivot table</a><br>
 </body>
