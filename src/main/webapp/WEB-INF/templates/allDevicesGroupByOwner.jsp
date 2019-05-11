@@ -20,11 +20,11 @@
         <th>Ready</th>
         <th>Action</th>
     </tr>
-    <c:forEach items="${owners}" var="owner">
+    <c:forEach items="${groupByOwners}" var="groupByOwner">
         <tr>
-            <td colspan="3">${owner.abbr}</td>
+            <td colspan="3">${groupByOwner.owner.abbr}</td>
         </tr>
-        <c:forEach items="${deviceService.findAllByOwner(owner)}" var="device">
+        <c:forEach items="${groupByOwner.devices}" var="device">
             <tr>
                 <td>${device.type.name}</td>
                 <td>${device.ready}</td>

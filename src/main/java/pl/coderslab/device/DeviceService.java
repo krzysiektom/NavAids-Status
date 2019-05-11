@@ -4,8 +4,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import pl.coderslab.airfield.Airfield;
+import pl.coderslab.airfield.AirfieldService;
 import pl.coderslab.group.Group;
 import pl.coderslab.owner.Owner;
+import pl.coderslab.owner.OwnerService;
 import pl.coderslab.type.Type;
 import pl.coderslab.type.TypeService;
 
@@ -19,6 +21,10 @@ public class DeviceService {
     private DeviceRepository deviceRepository;
     @Autowired
     private TypeService typeService;
+    @Autowired
+    private AirfieldService airfieldService;
+    @Autowired
+    private OwnerService ownerService;
 
     public Device findById(Long id) {
         return deviceRepository.findOne(id);
@@ -70,6 +76,20 @@ public class DeviceService {
         List<Type> types = typeService.findAll();
         return types.stream()
                 .map(type -> new GroupByType(type.getName(), countByType(type), countByTypeAndReadyTrue(type), countByTypeAndReadyFalse(type), type.getId()))
+                .collect(Collectors.toList());
+    }
+
+    public List<GroupByOwner> groupByOwner() {
+        List<Owner> owners = ownerService.findAllOwners();
+        return owners.stream()
+                .map(owner -> new GroupByOwner(owner, findAllByOwner(owner)))
+                .collect(Collectors.toList());
+    }
+
+    public List<GroupByAirfield> groupByAirfield() {
+        List<Airfield> airfields = airfieldService.findAllAirfields();
+        return airfields.stream()
+                .map(airfield -> new GroupByAirfield(airfield, findAllByAirfield(airfield)))
                 .collect(Collectors.toList());
     }
 

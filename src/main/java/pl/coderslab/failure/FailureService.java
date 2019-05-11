@@ -23,7 +23,7 @@ public class FailureService {
         return failureRepository.findOne(id);
     }
 
-    public List<Fix> findAllFixesByFailure(Failure failure) {
+    public List<Fix> findAllByFailure(Failure failure) {
     return fixRepository.findAllByFailure(failure);
     }
 }

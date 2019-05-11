@@ -20,11 +20,11 @@
         <th>Ready</th>
         <th>Action</th>
     </tr>
-    <c:forEach items="${airfields}" var="airfield">
+    <c:forEach items="${groupByAirfields}" var="groupByAirfield">
         <tr>
-            <td colspan="3">${airfield.abbr}</td>
+            <td colspan="3">${groupByAirfield.airfield.abbr}</td>
         </tr>
-        <c:forEach items="${deviceService.findAllByAirfield(airfield)}" var="device">
+        <c:forEach items="${groupByAirfield.devices}" var="device">
             <tr>
                 <td>${device.type.name}</td>
                 <td>${device.ready}</td>

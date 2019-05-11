@@ -50,15 +50,13 @@ public class DeviceController {
 
     @GetMapping("/groupByOwner")
     public String allDevicesGroupByOwner(Model model) {
-        model.addAttribute("owners", ownerService.findAllOwners());
-        model.addAttribute("deviceService", deviceService);
+        model.addAttribute("groupByOwners", deviceService.groupByOwner());
         return "allDevicesGroupByOwner";
     }
 
     @GetMapping("/groupByAirfield")
     public String allDevicesGroupByAirfield(Model model) {
-        model.addAttribute("airfields", airfieldService.findAllAirfields());
-        model.addAttribute("deviceService", deviceService);
+        model.addAttribute("groupByAirfields", deviceService.groupByAirfield());
         return "allDevicesGroupByAirfield";
     }
 

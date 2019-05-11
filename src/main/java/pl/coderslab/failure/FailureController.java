@@ -23,7 +23,7 @@ public class FailureController {
     public String failureById(@PathVariable("id") Long id, Model model) {
         Failure failure = failureService.findOne(id);
         model.addAttribute("failure", failure);
-        model.addAttribute("allFixes", failureService.findAllFixesByFailure(failure));
+        model.addAttribute("allFixes", failureService.findAllByFailure(failure));
         return "failure/failurePage";
     }
 }
