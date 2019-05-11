@@ -13,5 +13,7 @@
 <a href="/device/groupByAirfield">All devices group by airfield</a><br>
 <a href="/device/groupByTypeOrderByGroup">All devices group by type order by group</a><br>
 <a href="/device/pivotTable">Pivot table</a><br>
+<a href="/failure/">All failure</a><br>
+
 </body>
 </html>
