@@ -62,7 +62,7 @@ public class DeviceController {
 
     @GetMapping("type/{id}")
     public String devicesByType(@PathVariable("id") Long id, Model model) {
-        Type type = typeService.findTypeById(id);
+        Type type = typeService.findById(id);
         model.addAttribute("type", type);
         model.addAttribute("allDevices", deviceService.findAllByType(type));
         return "devicesByType";
@@ -70,8 +70,7 @@ public class DeviceController {
 
     @GetMapping("/groupByTypeOrderByGroup")
     public String allDevicesGroupByTypeOrderByGroup(Model model) {
-        model.addAttribute("groups", groupService.findAll());
-        model.addAttribute("deviceService", deviceService);
+        model.addAttribute("groupByGroups", deviceService.groupByGroups());
         return "allDevicesGroupByTypeOrderByGroup";
     }
 

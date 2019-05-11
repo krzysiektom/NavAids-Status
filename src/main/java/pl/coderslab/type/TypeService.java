@@ -13,16 +13,12 @@ public class TypeService {
     @Autowired
     private TypeRepository typeRepository;
 
-    public Type findTypeById(Long id) {
+    public Type findById(Long id) {
         return typeRepository.findOne(id);
     }
 
     public List<Type> findAll() {
         return typeRepository.findAll();
-    }
-
-    public List<Type> findAllTypesByGroup(Group group) {
-        return typeRepository.findAllByGroup(group);
     }
 
     public List<Type> findAllByGroup(Group group) {

@@ -6,6 +6,7 @@ import org.springframework.transaction.annotation.Transactional;
 import pl.coderslab.airfield.Airfield;
 import pl.coderslab.airfield.AirfieldService;
 import pl.coderslab.group.Group;
+import pl.coderslab.group.GroupService;
 import pl.coderslab.owner.Owner;
 import pl.coderslab.owner.OwnerService;
 import pl.coderslab.type.Type;
@@ -25,6 +26,8 @@ public class DeviceService {
     private AirfieldService airfieldService;
     @Autowired
     private OwnerService ownerService;
+    @Autowired
+    private GroupService groupService;
 
     public Device findById(Long id) {
         return deviceRepository.findOne(id);
@@ -93,4 +96,13 @@ public class DeviceService {
                 .collect(Collectors.toList());
     }
 
+    public List<GroupByGroup> groupByGroups() {
+        List<Group> groups = groupService.findAll();
+        return groups.stream()
+                .map(group -> new GroupByGroup(group, typeService.findAllByGroup(group).stream()
+                        .map(type -> new GroupByType(type.getName(), countByType(type), countByTypeAndReadyTrue(type), countByTypeAndReadyFalse(type), type.getId()))
+                        .collect(Collectors.toList())))
+                .collect(Collectors.toList());
+
+    }
 }

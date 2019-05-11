@@ -15,17 +15,17 @@
         <th>Under-service</th>
         <th>Action</th>
     </tr>
-    <c:forEach items="${groups}" var="group">
+    <c:forEach items="${groupByGroups}" var="groupByGroup">
         <tr>
-            <td colspan="5">${group.name}</td>
+            <td colspan="5">${groupByGroup.group.name}</td>
         </tr>
-        <c:forEach items="${deviceService.findAllTypesByGroup(group)}" var="type">
+        <c:forEach items="${groupByGroup.groupByTypes}" var="groupByType">
             <tr>
-                <td>${type.name}</td>
-                <td>${deviceService.countByType(type)}</td>
-                <td>${deviceService.countByTypeAndReadyTrue(type)}</td>
-                <td>${deviceService.countByTypeAndReadyFalse(type)}</td>
-                <td><a href="/device/type/${type.id}">Details</a></td>
+                <td>${groupByType.typeName}</td>
+                <td>${groupByType.count}</td>
+                <td>${groupByType.ready}</td>
+                <td>${groupByType.underService}</td>
+                <td><a href="/device/type/${groupByType.typeId}">Details</a></td>
             </tr>
         </c:forEach>
     </c:forEach>
