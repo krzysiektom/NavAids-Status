@@ -7,7 +7,7 @@ import pl.coderslab.type.Type;
 
 import java.util.List;
 
-public interface DeviceRepository extends JpaRepository<Device, Long> {
+interface DeviceRepository extends JpaRepository<Device, Long> {
     Long countByType(Type type);
 
     Long countByTypeAndReadyFalse(Type type);
