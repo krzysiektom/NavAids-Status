@@ -28,6 +28,8 @@ public class DeviceService {
     private OwnerService ownerService;
     @Autowired
     private GroupService groupService;
+    @Autowired
+    DeviceDTO deviceDTO;
 
     public Device findById(Long id) {
         return deviceRepository.findOne(id);
@@ -90,7 +92,7 @@ public class DeviceService {
     }
 
     public List<GroupByAirfield> groupByAirfield() {
-        List<Airfield> airfields = airfieldService.findAllAirfields();
+        List<Airfield> airfields = airfieldService.findAll();
         return airfields.stream()
                 .map(airfield -> new GroupByAirfield(airfield, findAllByAirfield(airfield)))
                 .collect(Collectors.toList());
@@ -103,6 +105,13 @@ public class DeviceService {
                         .map(type -> new GroupByType(type.getName(), countByType(type), countByTypeAndReadyTrue(type), countByTypeAndReadyFalse(type), type.getId()))
                         .collect(Collectors.toList())))
                 .collect(Collectors.toList());
+    }
 
+    public List<Owner> findAllOwnersBySuperior(Owner superior) {
+        return ownerService.findAllOwnersBySuperior(superior);
+    }
+
+    public Airfield findAirfieldByOwner(Owner owner) {
+        return airfieldService.findByOwner(owner);
     }
 }

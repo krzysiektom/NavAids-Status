@@ -13,11 +13,11 @@ public class AirfieldService {
     @Autowired
     private AirfieldRepository airfieldRepository;
 
-    public Airfield findAirfieldByOwner(Owner owner) {
+    public Airfield findByOwner(Owner owner) {
         return airfieldRepository.findByOwner(owner);
     }
 
-    public List<Airfield> findAllAirfields() {
+    public List<Airfield> findAll() {
         return airfieldRepository.findAll();
     }
 

@@ -4,22 +4,41 @@
 
 <html>
 <head>
+    <script src="<c:url value="/webjars/jquery/3.0.0/jquery.min.js"/>"></script>
+    <script src="<c:url value="/webjars/bootstrap/4.3.1/js/bootstrap.min.js"/>"></script>
+    <link href="<c:url value="/webjars/bootstrap/4.3.1/css/bootstrap.min.css"/>" rel="stylesheet">
+    <link href="<c:url value="/resources/css/main.css"/>" rel="stylesheet">
     <title>devicesByType</title>
 </head>
 <body>
-<table><b>All devices by type: "${type.name}"</b>
-    <tr>
-        <th>Airfield</th>
-        <th>Status</th>
-        <th>Action</th>
-    </tr>
-    <c:forEach items="${allDevices}" var="device">
-        <tr>
-            <td>${device.airfield.abbr}</td>
-            <td>${device.ready}</td>
-            <td><a href="/device/${device.id}">Details</a></td>
-        </tr>
-    </c:forEach>
-</table>
+
+<%@include file="fragments/header.jspf" %>
+
+<div class="container">
+
+    <header>All devices by type: "${type.name}"</header>
+
+
+    <div class="card mt-4">
+        <div class="card-body">
+
+            <table class="table table-hover">
+                <tr>
+                    <th>Airfield</th>
+                    <th>Status</th>
+                    <th style="width: 15%">Actions</th>
+                </tr>
+                <c:forEach items="${allDevices}" var="device">
+                    <tr>
+                        <td>${device.airfield.abbr}</td>
+                        <td>${device.ready}</td>
+                        <td><a href="/device/${device.id}" class="btn btn-success">Details</a></td>
+                    </tr>
+                </c:forEach>
+            </table>
+        </div>
+    </div>
+</div>
+
 </body>
 </html>

@@ -4,26 +4,46 @@
 
 <html>
 <head>
+    <script src="<c:url value="/webjars/jquery/3.0.0/jquery.min.js"/>"></script>
+    <script src="<c:url value="/webjars/bootstrap/4.3.1/js/bootstrap.min.js"/>"></script>
+    <link href="<c:url value="/webjars/bootstrap/4.3.1/css/bootstrap.min.css"/>" rel="stylesheet">
+    <link href="<c:url value="/resources/css/main.css"/>" rel="stylesheet">
+    <title>allDevices</title>
     <title>devicePage</title>
 </head>
 <body>
-<table><b>Device:</b>
-    <tr>
-        <th>Group</th>
-        <th>Type</th>
-        <th>Status</th>
-        <th>Factory Number</th>
-        <th>Owner</th>
-        <th>Airfield</th>
-    </tr>
-    <tr>
-        <td>${device.type.group.abbr}</td>
-        <td>${device.type.name}</td>
-        <td>${device.ready}</td>
-        <td>${device.factoryNumber}</td>
-        <td>${device.owner.abbr}</td>
-        <td>${device.airfield.abbr}</td>
-    </tr>
-</table>
+
+<%@include file="fragments/header.jspf" %>
+
+<div class="container">
+
+    <header>Device</header>
+
+
+    <div class="card mt-4">
+        <div class="card-body">
+
+            <table class="table table-hover">
+                <tr>
+                <tr>
+                    <th>Group</th>
+                    <th>Type</th>
+                    <th>Status</th>
+                    <th>Factory Number</th>
+                    <th>Owner</th>
+                    <th>Airfield</th>
+                </tr>
+                </tr>
+                <td>${device.type.group.abbr}</td>
+                <td>${device.type.name}</td>
+                <td>${device.ready}</td>
+                <td>${device.factoryNumber}</td>
+                <td>${device.owner.abbr}</td>
+                <td>${device.airfield.abbr}</td>
+            </table>
+        </div>
+    </div>
+</div>
+
 </body>
 </html>

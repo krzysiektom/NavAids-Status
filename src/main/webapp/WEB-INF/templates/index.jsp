@@ -4,16 +4,33 @@
 
 <html>
 <head>
+    <script src="<c:url value="/webjars/jquery/3.0.0/jquery.min.js"/>"></script>
+    <script src="<c:url value="/webjars/bootstrap/4.3.1/js/bootstrap.min.js"/>"></script>
+    <link href="<c:url value="/webjars/bootstrap/4.3.1/css/bootstrap.min.css"/>" rel="stylesheet">
+    <link href="<c:url value="/resources/css/main.css"/>" rel="stylesheet">
     <title>Home</title>
 </head>
 <body>
-<a href="/device/">All devices</a><br>
-<a href="/device/groupByType">All devices group by type</a><br>
-<a href="/device/groupByOwner">All devices group by owner</a><br>
-<a href="/device/groupByAirfield">All devices group by airfield</a><br>
-<a href="/device/groupByTypeOrderByGroup">All devices group by type order by group</a><br>
-<a href="/device/pivotTable">Pivot table</a><br>
-<a href="/failure/">All failure</a><br>
+<%@include file="fragments/header.jspf" %>
+
+<div class="container">
+
+    <header>Devices</header>
+
+
+    <div class="card mt-4">
+        <div class="card-body">
+
+            <a href="/device/">All devices</a><br>
+            <a href="/device/groupByType">All devices group by type</a><br>
+            <a href="/device/groupByOwner">All devices group by owner</a><br>
+            <a href="/device/groupByAirfield">All devices group by airfield</a><br>
+            <a href="/device/groupByTypeOrderByGroup">All devices group by type order by group</a><br>
+            <a href="/device/pivotTable">Pivot table</a><br>
+            <a href="/failure/">All failure</a><br>
+        </div>
+    </div>
+</div>
 
 </body>
 </html>
