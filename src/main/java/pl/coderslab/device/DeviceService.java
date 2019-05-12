@@ -107,6 +107,13 @@ public class DeviceService {
                 .collect(Collectors.toList());
     }
 
+    public List<DevicesByGroup> findAllByGroup(Group group) {
+        List<Type> types = typeService.findAllByGroup(group);
+        return types.stream()
+                .map(type -> new DevicesByGroup(type, findAllByType(type)))
+                .collect(Collectors.toList());
+    }
+
     public List<Owner> findAllOwnersBySuperior(Owner superior) {
         return ownerService.findAllOwnersBySuperior(superior);
     }

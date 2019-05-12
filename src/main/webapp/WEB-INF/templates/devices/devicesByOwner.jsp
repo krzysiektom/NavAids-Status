@@ -1,3 +1,4 @@
+
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
@@ -8,40 +9,33 @@
     <script src="<c:url value="/webjars/bootstrap/4.3.1/js/bootstrap.min.js"/>"></script>
     <link href="<c:url value="/webjars/bootstrap/4.3.1/css/bootstrap.min.css"/>" rel="stylesheet">
     <link href="<c:url value="/resources/css/main.css"/>" rel="stylesheet">
-    <title>allDevicesGroupByTypeOrderByGroup</title>
+    <title>deviceByOwner</title>
 </head>
 <body>
-
-<%@include file="fragments/header.jspf" %>
+<%@include file="../fragments/header.jspf" %>
 
 <div class="container">
 
-    <header>All devices group by type order by group</header>
+    <header>All devices by owner: "${owner.abbr}"</header>
+
 
     <div class="card mt-4">
         <div class="card-body">
 
             <table class="table table-hover">
                 <tr>
+                    <th>Airfield</th>
                     <th>Type</th>
-                    <th>Amount</th>
-                    <th>Ready</th>
-                    <th>Under-service</th>
+                    <th>Status</th>
                     <th style="width: 15%">Actions</th>
                 </tr>
-                <c:forEach items="${groupByGroups}" var="groupByGroup">
+                <c:forEach items="${allDevices}" var="device">
                     <tr>
-                        <td colspan="5">${groupByGroup.group.name}</td>
+                        <td>${device.airfield.abbr}</td>
+                        <td>${device.type.name}</td>
+                        <td>${device.ready}</td>
+                        <td><a href="/devices/${device.id}" class="btn btn-success">Details</a></td>
                     </tr>
-                    <c:forEach items="${groupByGroup.groupByTypes}" var="groupByType">
-                        <tr>
-                            <td>${groupByType.typeName}</td>
-                            <td>${groupByType.count}</td>
-                            <td>${groupByType.ready}</td>
-                            <td>${groupByType.underService}</td>
-                            <td><a href="/device/type/${groupByType.typeId}" class="btn btn-success">Details</a></td>
-                        </tr>
-                    </c:forEach>
                 </c:forEach>
             </table>
         </div>

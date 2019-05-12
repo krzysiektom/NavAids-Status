@@ -29,4 +29,8 @@ public class OwnerService {
                 .flatMap(Collection::stream)
                 .collect(Collectors.toList());
     }
+
+    public Owner findById(Long id) {
+        return ownerRepository.findOne(id);
+    }
 }

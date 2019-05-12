@@ -21,13 +21,13 @@
     <div class="card mt-4">
         <div class="card-body">
 
-            <a href="/device/">All devices</a><br>
-            <a href="/device/groupByType">All devices group by type</a><br>
-            <a href="/device/groupByOwner">All devices group by owner</a><br>
-            <a href="/device/groupByAirfield">All devices group by airfield</a><br>
-            <a href="/device/groupByTypeOrderByGroup">All devices group by type order by group</a><br>
-            <a href="/device/pivotTable">Pivot table</a><br>
-            <a href="/failure/">All failure</a><br>
+            <a href="/devices/">All devices</a><br>
+            <a href="/devices/groupByType">All devices group by type</a><br>
+            <a href="/devices/groupByOwner">All devices group by owner</a><br>
+            <a href="/devices/groupByAirfield">All devices group by airfield</a><br>
+            <a href="/devices/groupByTypeOrderByGroup">All devices group by type order by group</a><br>
+            <a href="/devices/pivotTable">Pivot table</a><br>
+            <a href="/failures/">All failure</a><br>
         </div>
     </div>
 </div>

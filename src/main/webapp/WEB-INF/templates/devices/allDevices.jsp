@@ -8,15 +8,14 @@
     <script src="<c:url value="/webjars/bootstrap/4.3.1/js/bootstrap.min.js"/>"></script>
     <link href="<c:url value="/webjars/bootstrap/4.3.1/css/bootstrap.min.css"/>" rel="stylesheet">
     <link href="<c:url value="/resources/css/main.css"/>" rel="stylesheet">
-    <title>devicesByType</title>
+    <title>allDevices</title>
 </head>
 <body>
-
-<%@include file="fragments/header.jspf" %>
+<%@include file="../fragments/header.jspf" %>
 
 <div class="container">
 
-    <header>All devices by type: "${type.name}"</header>
+    <header>All devices</header>
 
 
     <div class="card mt-4">
@@ -25,20 +24,24 @@
             <table class="table table-hover">
                 <tr>
                     <th>Airfield</th>
+                    <th>Type</th>
                     <th>Status</th>
                     <th style="width: 15%">Actions</th>
                 </tr>
                 <c:forEach items="${allDevices}" var="device">
                     <tr>
                         <td>${device.airfield.abbr}</td>
+                        <td>${device.type.name}</td>
                         <td>${device.ready}</td>
-                        <td><a href="/device/${device.id}" class="btn btn-success">Details</a></td>
+                        <td><a href="/devices/${device.id}" class="btn btn-success">Details</a>
+                        </td>
                     </tr>
                 </c:forEach>
             </table>
         </div>
     </div>
 </div>
+
 
 </body>
 </html>

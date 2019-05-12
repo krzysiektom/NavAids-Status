@@ -20,7 +20,7 @@
             <td>${failure.device.type.name}</td>
             <td>${failure.device.airfield.abbr}</td>
             <td>${failure.created}</td>
-            <td><a href="/failure/${failure.id}">Details</a></td>
+            <td><a href="/failures/${failure.id}">Details</a></td>
         </tr>
     </c:forEach>
 </table>

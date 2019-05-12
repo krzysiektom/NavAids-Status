@@ -12,20 +12,19 @@
 </head>
 <body>
 
-<%@include file="fragments/header.jspf" %>
+<%@include file="../fragments/header.jspf" %>
 
 <div class="container">
 
-    <header>All devices group by Owner</header>
-
+    <header>All devices group by owner</header>
 
     <div class="card mt-4">
         <div class="card-body">
 
             <table class="table table-hover">
                 <tr>
-                    <th>Airfield</th>
                     <th>Type</th>
+                    <th>Status</th>
                     <th style="width: 15%">Actions</th>
                 </tr>
                 <c:forEach items="${groupByOwners}" var="groupByOwner">
@@ -36,7 +35,7 @@
                         <tr>
                             <td>${device.type.name}</td>
                             <td>${device.ready}</td>
-                            <td><a href="/device/${device.id}" class="btn btn-success">Details</a></td>
+                            <td><a href="/devices/${device.id}" class="btn btn-success">Details</a></td>
                         </tr>
                     </c:forEach>
                 </c:forEach>

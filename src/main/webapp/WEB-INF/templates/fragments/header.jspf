@@ -12,24 +12,39 @@
                     <a class="nav-link" href="/">Main</a>
                 </li>
                 <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="/device" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <a class="nav-link dropdown-toggle" href="/devices" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         Devices
                     </a>
                     <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                        <a class="dropdown-item" href="/device/">All</a>
-                        <a class="dropdown-item" href="/device/groupByAirfield">Group by airfield</a>
-                        <a class="dropdown-item" href="/device/groupByOwner">Group by owner</a>
-                        <a class="dropdown-item" href="/device/groupByType">Group by type</a>
-                        <a class="dropdown-item" href="/device/groupByTypeOrderByGroup">All devices group by type order by group</a>
+                        <a class="dropdown-item" href="/devices/">All</a>
+                        <a class="dropdown-item" href="/devices/groupByAirfield">Group by airfield</a>
+                        <a class="dropdown-item" href="/devices/groupByOwner">Group by owner</a>
+                        <a class="dropdown-item" href="/devices/groupByType">Group by type</a>
+                        <a class="dropdown-item" href="/devices/groupByTypeOrderByGroup">All devices group by type order by group</a>
+                        <a class="dropdown-item" href="/devices/pivotTable">Pivot table on devices</a>
                     </div>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="/device/">Authors</a>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="/device" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Airfields
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                        <a class="dropdown-item" href="/devices/airfield/1">Świdwin</a>
+                        <a class="dropdown-item" href="/devices/airfield/2">Malbork</a>
+                        <a class="dropdown-item" href="/devices/airfield/3">Mińsk Mazowiecki</a>
+                        <a class="dropdown-item" href="/devices/airfield/4">Mirosławiec</a>
+                        <a class="dropdown-item" href="/devices/airfield/5">Poznań Krzesiny</a>
+                        <a class="dropdown-item" href="/devices/airfield/6">Łask</a>
+                    </div>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link disabled" href="/failure/">Publishers</a>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="/device" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Failures
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                        <a class="dropdown-item" href="/failures/">All</a>
+                    </div>
                 </li>
-
             </ul>
         </div>
     </div>

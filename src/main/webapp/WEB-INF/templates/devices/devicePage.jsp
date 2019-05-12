@@ -9,13 +9,15 @@
     <link href="<c:url value="/webjars/bootstrap/4.3.1/css/bootstrap.min.css"/>" rel="stylesheet">
     <link href="<c:url value="/resources/css/main.css"/>" rel="stylesheet">
     <title>allDevices</title>
+    <title>devicePage</title>
 </head>
 <body>
-<%@include file="fragments/header.jspf" %>
+
+<%@include file="../fragments/header.jspf" %>
 
 <div class="container">
 
-    <header>All devices</header>
+    <header>Device</header>
 
 
     <div class="card mt-4">
@@ -23,25 +25,25 @@
 
             <table class="table table-hover">
                 <tr>
-                    <th>Airfield</th>
+                <tr>
+                    <th>Group</th>
                     <th>Type</th>
                     <th>Status</th>
-                    <th style="width: 15%">Actions</th>
+                    <th>Factory Number</th>
+                    <th>Owner</th>
+                    <th>Airfield</th>
                 </tr>
-                <c:forEach items="${allDevices}" var="device">
-                    <tr>
-                        <td>${device.airfield.abbr}</td>
-                        <td>${device.type.name}</td>
-                        <td>${device.ready}</td>
-                        <td><a href="/device/${device.id}" class="btn btn-success">Details</a>
-                        </td>
-                    </tr>
-                </c:forEach>
+                </tr>
+                <td>${device.type.group.abbr}</td>
+                <td>${device.type.name}</td>
+                <td>${device.ready}</td>
+                <td>${device.factoryNumber}</td>
+                <td>${device.owner.abbr}</td>
+                <td>${device.airfield.abbr}</td>
             </table>
         </div>
     </div>
 </div>
-
 
 </body>
 </html>

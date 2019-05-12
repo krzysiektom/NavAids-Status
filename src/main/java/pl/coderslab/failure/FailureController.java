@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
-@RequestMapping("failure")
+@RequestMapping("failures")
 public class FailureController {
     @Autowired
     FailureService failureService;
@@ -16,7 +16,7 @@ public class FailureController {
     @GetMapping("/")
     public String allFailures(Model model) {
         model.addAttribute("allFailures", failureService.findAll());
-        return "failure/allFailures";
+        return "failures/allFailures";
     }
 
     @GetMapping("/{id}")
@@ -24,6 +24,6 @@ public class FailureController {
         Failure failure = failureService.findOne(id);
         model.addAttribute("failure", failure);
         model.addAttribute("allFixes", failureService.findAllByFailure(failure));
-        return "failure/failurePage";
+        return "failures/failurePage";
     }
 }

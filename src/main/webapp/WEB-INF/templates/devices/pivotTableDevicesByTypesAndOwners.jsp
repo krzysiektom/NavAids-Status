@@ -13,7 +13,7 @@
 </head>
 <body>
 
-<%@include file="fragments/header.jspf" %>
+<%@include file="../fragments/header.jspf" %>
 
 <div class="container">
 
@@ -27,7 +27,8 @@
                 <tr>
                     <th colspan="3"></th>
                     <c:forEach items="${groups}" var="group">
-                        <th colspan="2">"${group.abbr}"</th>
+                        <th colspan="2">
+                            <a href="/devices/group/${group.id}">${group.abbr}</a></th>
                     </c:forEach>
                 </tr>
                 <tr>
@@ -43,8 +44,8 @@
                     <c:forEach items="${deviceService.findAllOwnersBySuperior(superior)}" var="owner">
                         <tr>
                             <td>${owner.superior.abbr}</td>
-                            <td>${owner.abbr}</td>
-                            <td>${deviceService.findAirfieldByOwner(owner).abbr}</td>
+                            <td><a href="/devices/owner/${owner.id}">${owner.abbr}</a> </td>
+                            <td><a href="/devices/airfield/${deviceService.findAirfieldByOwner(owner).id}">${deviceService.findAirfieldByOwner(owner).abbr}</a></td>
                             <c:forEach items="${groups}" var="group">
                                 <td>${deviceService.countByOwnerAndGroup(owner,group)}</td>
                                 <td>${deviceService.countByOwnerAndGroupAndReadyTrue(owner,group)}</td>

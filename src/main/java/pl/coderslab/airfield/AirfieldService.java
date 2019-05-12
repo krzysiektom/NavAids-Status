@@ -21,4 +21,6 @@ public class AirfieldService {
         return airfieldRepository.findAll();
     }
 
+    public Airfield findById(Long id) { return airfieldRepository.findOne(id);
+    }
 }

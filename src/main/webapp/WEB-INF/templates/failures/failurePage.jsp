@@ -34,7 +34,7 @@
             <td>${fix.done}</td>
             <td>${fix.usedMaterials}</td>
             <td>${fix.created}</td>
-            <td><a href="/fix/${fix.id}">Details</a></td>
+            <td><a href="/fixes/${fix.id}">Details</a></td>
         </tr>
     </c:forEach>
 </table>
