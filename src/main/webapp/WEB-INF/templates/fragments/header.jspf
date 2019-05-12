@@ -1,3 +1,5 @@
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+
 <nav class="navbar navbar-expand-lg navbar-blue navbar-dark fixed-top">
     <div class="container">
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo03"
@@ -29,12 +31,10 @@
                         Airfields
                     </a>
                     <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                        <a class="dropdown-item" href="/devices/airfield/1">Świdwin</a>
-                        <a class="dropdown-item" href="/devices/airfield/2">Malbork</a>
-                        <a class="dropdown-item" href="/devices/airfield/3">Mińsk Mazowiecki</a>
-                        <a class="dropdown-item" href="/devices/airfield/4">Mirosławiec</a>
-                        <a class="dropdown-item" href="/devices/airfield/5">Poznań Krzesiny</a>
-                        <a class="dropdown-item" href="/devices/airfield/6">Łask</a>
+                        <c:forEach items="${AllAirfields}" var="airfield">
+                            <a class="dropdown-item" href="/devices/airfield/${airfield.id}">${airfield.name}</a>
+                        </c:forEach>
+
                     </div>
                 </li>
                 <li class="nav-item dropdown">
