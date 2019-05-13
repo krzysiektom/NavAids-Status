@@ -77,13 +77,6 @@ public class DeviceService {
                 .reduce(0L, Long::sum);
     }
 
-    public List<GroupByType> groupByTypes() {
-        List<Type> types = typeService.findAll();
-        return types.stream()
-                .map(type -> new GroupByType(type.getName(), countByType(type), countByTypeAndReadyTrue(type), countByTypeAndReadyFalse(type), type.getId()))
-                .collect(Collectors.toList());
-    }
-
     public List<GroupByOwner> groupByOwner() {
         List<Owner> owners = ownerService.findAllOwners();
         return owners.stream()
@@ -100,11 +93,12 @@ public class DeviceService {
 
     public List<GroupByGroup> groupByGroups() {
         List<Group> groups = groupService.findAll();
-        return groups.stream()
-                .map(group -> new GroupByGroup(group, typeService.findAllByGroup(group).stream()
-                        .map(type -> new GroupByType(type.getName(), countByType(type), countByTypeAndReadyTrue(type), countByTypeAndReadyFalse(type), type.getId()))
-                        .collect(Collectors.toList())))
-                .collect(Collectors.toList());
+        return
+                groups.stream()
+                        .map(group -> new GroupByGroup(group, typeService.findAllByGroup(group).stream()
+                                .map(type -> new GroupByType(type, countByType(type), countByTypeAndReadyTrue(type), countByTypeAndReadyFalse(type)))
+                                .collect(Collectors.toList())))
+                        .collect(Collectors.toList());
     }
 
     public List<DevicesByGroup> findAllByGroup(Group group) {

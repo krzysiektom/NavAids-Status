@@ -27,11 +27,11 @@
                 </tr>
                 <c:forEach items="${groupByTypes}" var="groupByType">
                     <tr>
-                        <td>${groupByType.typeName}</td>
+                        <td>${groupByType.type.name}</td>
                         <td>${groupByType.count}</td>
                         <td>${groupByType.ready}</td>
                         <td>${groupByType.underService}</td>
-                        <td><a href="/devices/type/${groupByType.typeId}" class="btn btn-success">Details</a></td>
+                        <td><a href="/devices/type/${groupByType.type.id}" class="btn btn-success">Details</a></td>
                     </tr>
                 </c:forEach>
             </table>

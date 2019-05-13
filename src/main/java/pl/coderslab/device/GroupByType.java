@@ -1,26 +1,26 @@
 package pl.coderslab.device;
 
+import pl.coderslab.type.Type;
+
 public class GroupByType {
-    private String typeName;
+    private Type type;
     private Long count;
     private Long ready;
     private Long underService;
-    private Long typeId;
 
-    public GroupByType(String typeName, Long count, Long ready, Long underService, Long typeId) {
-        this.typeName = typeName;
+    public GroupByType(Type type, Long count, Long ready, Long underService) {
+        this.type = type;
         this.count = count;
         this.ready = ready;
         this.underService = underService;
-        this.typeId = typeId;
     }
 
-    public String getTypeName() {
-        return typeName;
+    public Type getType() {
+        return type;
     }
 
-    public void setTypeName(String typeName) {
-        this.typeName = typeName;
+    public void setType(Type type) {
+        this.type = type;
     }
 
     public Long getCount() {
@@ -47,11 +47,13 @@ public class GroupByType {
         this.underService = underService;
     }
 
-    public Long getTypeId() {
-        return typeId;
-    }
-
-    public void setTypeId(Long typeId) {
-        this.typeId = typeId;
+    @Override
+    public String toString() {
+        return "GroupByType{" +
+                "type=" + type +
+                ", count=" + count +
+                ", ready=" + ready +
+                ", underService=" + underService +
+                '}';
     }
 }

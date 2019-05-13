@@ -1,24 +1,23 @@
 package pl.coderslab.device;
 
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
-import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
-import javax.persistence.Query;
-import javax.transaction.Transactional;
 import java.util.List;
 
 @Repository
 @Transactional
-public class DeviceDTO {
+public interface DeviceDTO extends CrudRepository<Device, Long> {
 
-    @PersistenceContext
-    private EntityManager entityManager;
+    @Query("SELECT new pl.coderslab.device.GroupTest(d.type, count(d)) FROM Device d group by d.type)")
+    List<GroupTest> queryTest();
 
-
-    public List<Device> getAll() {
-        Query query = entityManager.createQuery("select d from Device d");
-        List<Device> allDevices = query.getResultList();
-        return allDevices;
-    }
+    @Query("SELECT new pl.coderslab.device.GroupByType(d.type, " +
+            "count(d), " +
+            "sum (CASE d.ready WHEN true THEN 1 WHEN false then 0 ELSE null END), " +
+            "sum (CASE d.ready WHEN true THEN 0 WHEN false then 1 ELSE null END))" +
+            "FROM Device d group by d.type)")
+    public List<GroupByType> groupByTypes();
 }

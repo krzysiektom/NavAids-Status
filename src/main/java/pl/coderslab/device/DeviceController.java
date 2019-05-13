@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import pl.coderslab.airfield.Airfield;
@@ -14,6 +15,8 @@ import pl.coderslab.owner.Owner;
 import pl.coderslab.owner.OwnerService;
 import pl.coderslab.type.Type;
 import pl.coderslab.type.TypeService;
+
+import java.util.List;
 
 @Controller
 @RequestMapping("devices")
@@ -28,9 +31,16 @@ public class DeviceController {
     private AirfieldService airfieldService;
     @Autowired
     private GroupService groupService;
+    @Autowired
+    private DeviceDTO deviceDTO;
 
     public DeviceController(DeviceService deviceService) {
         this.deviceService = deviceService;
+    }
+
+    @ModelAttribute("AllAirfields")
+    public List<Airfield> getAllAirfields(){
+        return  airfieldService.findAll();
     }
 
     @GetMapping("/")
@@ -47,7 +57,7 @@ public class DeviceController {
 
     @GetMapping("/groupByType")
     public String allDevicesGroupByType(Model model) {
-        model.addAttribute("groupByTypes", deviceService.groupByTypes());
+        model.addAttribute("groupByTypes", deviceDTO.groupByTypes());
         return "devices/allDevicesGroupByType";
     }
 
