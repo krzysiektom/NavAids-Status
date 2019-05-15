@@ -19,18 +19,38 @@ public class OwnerService {
         return ownerRepository.findAllBySuperior(ownerRepository.findOne(1L));
     }
 
-    public List<Owner> findAllOwnersBySuperior(Owner superior) {
-        return ownerRepository.findAllBySuperior(superior);
-    }
-
     public List<Owner> findAllOwners() {
-        return findAllSuperiors().stream()
-                .map(owner -> ownerRepository.findAllBySuperior(owner))
+        List<Owner> superiors = findAllSuperiors();
+        List<Owner> ownerList = ownerRepository.findAll();
+        ownerList.removeAll(superiors);
+        ownerList.remove(ownerRepository.findOne(1L));
+
+        return superiors.stream()
+                .map(superior -> ownerList.stream()
+                        .filter(owner -> owner.getSuperior().equals(superior))
+                        .collect(Collectors.toList()))
                 .flatMap(Collection::stream)
                 .collect(Collectors.toList());
     }
 
     public Owner findById(Long id) {
         return ownerRepository.findOne(id);
+    }
+
+    public List<OwnerBySuperior> findAllBySuperior() {
+        List<Owner> superiors = findAllSuperiors();
+        List<Owner> ownerList = ownerRepository.findAll();
+        ownerList.removeAll(superiors);
+        ownerList.remove(ownerRepository.findOne(1L));
+        List<OwnerBySuperior> result = superiors.stream()
+                .map(s -> new OwnerBySuperior(
+                                s,
+                                ownerList.stream()
+                                        .filter(owner -> owner.getSuperior().equals(s))
+                                        .collect(Collectors.toList())
+                        )
+                )
+                .collect(Collectors.toList());
+        return result;
     }
 }

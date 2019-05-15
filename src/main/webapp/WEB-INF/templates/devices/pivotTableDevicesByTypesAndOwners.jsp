@@ -40,18 +40,17 @@
                         <th>Ready</th>
                     </c:forEach>
                 </tr>
-                <c:forEach items="${superiors}" var="superior">
-                    <c:forEach items="${deviceService.findAllOwnersBySuperior(superior)}" var="owner">
-                        <tr>
-                            <td>${owner.superior.abbr}</td>
-                            <td><a href="/devices/owner/${owner.id}">${owner.abbr}</a> </td>
-                            <td><a href="/devices/airfield/${deviceService.findAirfieldByOwner(owner).id}">${deviceService.findAirfieldByOwner(owner).abbr}</a></td>
-                            <c:forEach items="${groups}" var="group">
-                                <td>${deviceService.countByOwnerAndGroup(owner,group)}</td>
-                                <td>${deviceService.countByOwnerAndGroupAndReadyTrue(owner,group)}</td>
-                            </c:forEach>
-                        </tr>
-                    </c:forEach>
+                <c:forEach items="${pivotTable}" var="pivotTableByAirfield">
+                    <tr>
+                        <td>${pivotTableByAirfield.airfield.owner.superior.abbr}</td>
+                        <td>${pivotTableByAirfield.airfield.owner.abbr}</td>
+                        <td>${pivotTableByAirfield.airfield.abbr}</td>
+                        <c:forEach items="${pivotTableByAirfield.devicesCountByAirfieldAndGroups}" var="device">
+                            <td>${device.ready}</td>
+                            <td>${device.underService}</td>
+                        </c:forEach>
+                    </tr>
+
                 </c:forEach>
             </table>
         </div>

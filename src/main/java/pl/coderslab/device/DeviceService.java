@@ -12,6 +12,7 @@ import pl.coderslab.owner.OwnerService;
 import pl.coderslab.type.Type;
 import pl.coderslab.type.TypeService;
 
+import java.util.Collection;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -51,68 +52,76 @@ public class DeviceService {
         return deviceRepository.findAllByAirfield(airfield);
     }
 
-    public Long countByType(Type type) {
-        return deviceRepository.countByType(type);
-    }
-
-    public Long countByTypeAndReadyTrue(Type type) {
-        return deviceRepository.countByTypeAndReadyTrue(type);
-    }
-
-    public Long countByTypeAndReadyFalse(Type type) {
-        return deviceRepository.countByTypeAndReadyFalse(type);
-    }
-
-    public Long countByOwnerAndGroup(Owner owner, Group group) {
-        List<Type> types = typeService.findAllByGroup(group);
-        return types.stream()
-                .map(type -> deviceRepository.countByOwnerAndType(owner, type))
-                .reduce(0L, Long::sum);
-    }
-
-    public Long countByOwnerAndGroupAndReadyTrue(Owner owner, Group group) {
-        List<Type> types = typeService.findAllByGroup(group);
-        return types.stream()
-                .map(type -> deviceRepository.countByOwnerAndTypeAndReadyTrue(owner, type))
-                .reduce(0L, Long::sum);
-    }
-
-    public List<GroupByOwner> groupByOwner() {
+    public List<DevicesByOwner> groupByOwner() {
         List<Owner> owners = ownerService.findAllOwners();
+        List<Device> devices = deviceRepository.findAll();
         return owners.stream()
-                .map(owner -> new GroupByOwner(owner, findAllByOwner(owner)))
+                .map(owner -> new DevicesByOwner(
+                                owner,
+                                devices.stream().filter(device -> device.getOwner().equals(owner)).collect(Collectors.toList())
+                        )
+                )
                 .collect(Collectors.toList());
     }
 
-    public List<GroupByAirfield> groupByAirfield() {
+    public List<DevicesByAirfield> groupByAirfield() {
         List<Airfield> airfields = airfieldService.findAll();
+        List<Device> devices = deviceRepository.findAll();
         return airfields.stream()
-                .map(airfield -> new GroupByAirfield(airfield, findAllByAirfield(airfield)))
+                .map(airfield -> new DevicesByAirfield(
+                                airfield,
+                                devices.stream().filter(device -> device.getAirfield().equals(airfield)).collect(Collectors.toList())
+                        )
+                )
                 .collect(Collectors.toList());
     }
 
-    public List<GroupByGroup> groupByGroups() {
+    public List<DevicesCountByTypeOrderByGroup> groupByGroups() {
         List<Group> groups = groupService.findAll();
-        return
-                groups.stream()
-                        .map(group -> new GroupByGroup(group, typeService.findAllByGroup(group).stream()
-                                .map(type -> new GroupByType(type, countByType(type), countByTypeAndReadyTrue(type), countByTypeAndReadyFalse(type)))
-                                .collect(Collectors.toList())))
-                        .collect(Collectors.toList());
-    }
+        List<Type> types = typeService.findAll();
+        List<DevicesCountByType> devicesCountByTypes = deviceDTO.countByTypes();
 
-    public List<DevicesByGroup> findAllByGroup(Group group) {
-        List<Type> types = typeService.findAllByGroup(group);
-        return types.stream()
-                .map(type -> new DevicesByGroup(type, findAllByType(type)))
+        return groups.stream()
+                .map(group ->
+                        new DevicesCountByTypeOrderByGroup(
+                                group,
+                                types.stream()
+                                        .filter(type -> type.getGroup().equals(group))
+                                        .map(type -> devicesCountByTypes.stream()
+                                                .filter(devicesCountByType -> devicesCountByType.getType().equals(type))
+                                                .collect(Collectors.toList()))
+                                        .flatMap(Collection::stream)
+                                        .collect(Collectors.toList())
+                        )
+                )
                 .collect(Collectors.toList());
     }
 
-    public List<Owner> findAllOwnersBySuperior(Owner superior) {
-        return ownerService.findAllOwnersBySuperior(superior);
+    public List<DevicesByType> findAllByGroup(Group group) {
+        List<Type> types = typeService.findAllByGroup(group);
+        List<Device> devices = deviceRepository.findAll();
+
+        return types.stream()
+                .map(type -> new DevicesByType(
+                                type,
+                                devices.stream()
+                                        .filter(device -> device.getType().equals(type))
+                                        .collect(Collectors.toList())
+                        )
+                )
+                .collect(Collectors.toList());
     }
 
-    public Airfield findAirfieldByOwner(Owner owner) {
-        return airfieldService.findByOwner(owner);
+    public List<DevicesPivotTableByAirfieldAndGroup> getPivotTableByAirfieldAndGroup() {
+        List<Airfield> airfields = airfieldService.findAll();
+        List<DevicesCountByAirfieldAndGroup> devicesCountByAirfieldAndGroups = deviceDTO.countByAirfieldAndGroup();
+        return airfields.stream()
+                .map(airfield -> new DevicesPivotTableByAirfieldAndGroup(
+                        airfield,
+                        devicesCountByAirfieldAndGroups.stream()
+                                .filter(devicesCountByAirfieldAndGroup -> devicesCountByAirfieldAndGroup.getAirfield().equals(airfield))
+                                .collect(Collectors.toList())))
+                .collect(Collectors.toList());
     }
+
 }

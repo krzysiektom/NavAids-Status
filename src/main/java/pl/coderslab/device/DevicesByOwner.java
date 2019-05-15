@@ -4,11 +4,11 @@ import pl.coderslab.owner.Owner;
 
 import java.util.List;
 
-public class GroupByOwner {
+public class DevicesByOwner {
     private Owner owner;
     private List<Device> devices;
 
-    public GroupByOwner(Owner owner, List<Device> devices) {
+    public DevicesByOwner(Owner owner, List<Device> devices) {
         this.owner = owner;
         this.devices = devices;
     }

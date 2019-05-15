@@ -4,7 +4,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import pl.coderslab.airfield.Airfield;
@@ -15,8 +14,6 @@ import pl.coderslab.owner.Owner;
 import pl.coderslab.owner.OwnerService;
 import pl.coderslab.type.Type;
 import pl.coderslab.type.TypeService;
-
-import java.util.List;
 
 @Controller
 @RequestMapping("devices")
@@ -38,11 +35,6 @@ public class DeviceController {
         this.deviceService = deviceService;
     }
 
-    @ModelAttribute("AllAirfields")
-    public List<Airfield> getAllAirfields(){
-        return  airfieldService.findAll();
-    }
-
     @GetMapping("/")
     public String allDevices(Model model) {
         model.addAttribute("allDevices", deviceService.findAll());
@@ -55,10 +47,10 @@ public class DeviceController {
         return "devices/devicePage";
     }
 
-    @GetMapping("/groupByType")
+    @GetMapping("/countByTypes")
     public String allDevicesGroupByType(Model model) {
-        model.addAttribute("groupByTypes", deviceDTO.groupByTypes());
-        return "devices/allDevicesGroupByType";
+        model.addAttribute("devicesCountByTypes", deviceDTO.countByTypes());
+        return "devices/allDevicesCountByType";
     }
 
     @GetMapping("/groupByOwner")
@@ -105,17 +97,16 @@ public class DeviceController {
         return "devices/devicesByGroup";
     }
 
-    @GetMapping("/groupByTypeOrderByGroup")
+    @GetMapping("/countByTypeOrderByGroup")
     public String allDevicesGroupByTypeOrderByGroup(Model model) {
         model.addAttribute("groupByGroups", deviceService.groupByGroups());
-        return "devices/allDevicesGroupByTypeOrderByGroup";
+        return "devices/allDevicesCountByTypeOrderByGroup";
     }
 
     @GetMapping("/pivotTable")
     public String pivotTable(Model model) {
         model.addAttribute("groups", groupService.findAll());
-        model.addAttribute("superiors", ownerService.findAllSuperiors());
-        model.addAttribute("deviceService", deviceService);
+        model.addAttribute("pivotTable", deviceService.getPivotTableByAirfieldAndGroup());
         return "devices/pivotTableDevicesByTypesAndOwners";
     }
 }

@@ -33,13 +33,13 @@
                     <tr>
                         <td colspan="5">${groupByGroup.group.name}</td>
                     </tr>
-                    <c:forEach items="${groupByGroup.groupByTypes}" var="groupByType">
+                    <c:forEach items="${groupByGroup.devicesCountByTypes}" var="devicesCountByType">
                         <tr>
-                            <td>${groupByType.typeName}</td>
-                            <td>${groupByType.count}</td>
-                            <td>${groupByType.ready}</td>
-                            <td>${groupByType.underService}</td>
-                            <td><a href="/devices/type/${groupByType.typeId}" class="btn btn-success">Details</a></td>
+                            <td>${devicesCountByType.type.name}</td>
+                            <td>${devicesCountByType.count}</td>
+                            <td>${devicesCountByType.ready}</td>
+                            <td>${devicesCountByType.underService}</td>
+                            <td><a href="/devices/type/${devicesCountByType.type.id}" class="btn btn-success">Details</a></td>
                         </tr>
                     </c:forEach>
                 </c:forEach>

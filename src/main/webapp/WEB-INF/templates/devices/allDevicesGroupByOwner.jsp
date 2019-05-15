@@ -45,24 +45,5 @@
 </div>
 
 
-<table><b>All devices group by owner:</b>
-    <tr>
-        <th>Type</th>
-        <th>Ready</th>
-        <th>Action</th>
-    </tr>
-    <c:forEach items="${groupByOwners}" var="groupByOwner">
-        <tr>
-            <td colspan="3">${groupByOwner.owner.abbr}</td>
-        </tr>
-        <c:forEach items="${groupByOwner.devices}" var="device">
-            <tr>
-                <td>${device.type.name}</td>
-                <td>${device.ready}</td>
-                <td><a href="/device/${device.id}">Details</a></td>
-            </tr>
-        </c:forEach>
-    </c:forEach>
-</table>
 </body>
 </html>

@@ -4,11 +4,11 @@ import pl.coderslab.type.Type;
 
 import java.util.List;
 
-public class DevicesByGroup {
+public class DevicesByType {
 private Type type;
 private List<Device>devices;
 
-    public DevicesByGroup(Type type, List<Device> devices) {
+    public DevicesByType(Type type, List<Device> devices) {
         this.type = type;
         this.devices = devices;
     }

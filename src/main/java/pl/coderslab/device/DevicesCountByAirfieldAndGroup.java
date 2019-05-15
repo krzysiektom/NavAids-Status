@@ -1,26 +1,37 @@
 package pl.coderslab.device;
 
-import pl.coderslab.type.Type;
+import pl.coderslab.airfield.Airfield;
+import pl.coderslab.group.Group;
 
-public class GroupByType {
-    private Type type;
+public class DevicesCountByAirfieldAndGroup {
+    private Airfield airfield;
+    private Group group;
     private Long count;
     private Long ready;
     private Long underService;
 
-    public GroupByType(Type type, Long count, Long ready, Long underService) {
-        this.type = type;
+    public DevicesCountByAirfieldAndGroup(Airfield airfield, Group group, Long count, Long ready, Long underService) {
+        this.airfield = airfield;
+        this.group = group;
         this.count = count;
         this.ready = ready;
         this.underService = underService;
     }
 
-    public Type getType() {
-        return type;
+    public Airfield getAirfield() {
+        return airfield;
     }
 
-    public void setType(Type type) {
-        this.type = type;
+    public void setAirfield(Airfield airfield) {
+        this.airfield = airfield;
+    }
+
+    public Group getGroup() {
+        return group;
+    }
+
+    public void setGroup(Group group) {
+        this.group = group;
     }
 
     public Long getCount() {
@@ -45,15 +56,5 @@ public class GroupByType {
 
     public void setUnderService(Long underService) {
         this.underService = underService;
-    }
-
-    @Override
-    public String toString() {
-        return "GroupByType{" +
-                "type=" + type +
-                ", count=" + count +
-                ", ready=" + ready +
-                ", underService=" + underService +
-                '}';
     }
 }

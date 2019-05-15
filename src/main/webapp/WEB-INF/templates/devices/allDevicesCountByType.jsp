@@ -25,13 +25,13 @@
                     <th>Under-service</th>
                     <th style="width: 15%">Actions</th>
                 </tr>
-                <c:forEach items="${groupByTypes}" var="groupByType">
+                <c:forEach items="${devicesCountByTypes}" var="devicesCountByType">
                     <tr>
-                        <td>${groupByType.type.name}</td>
-                        <td>${groupByType.count}</td>
-                        <td>${groupByType.ready}</td>
-                        <td>${groupByType.underService}</td>
-                        <td><a href="/devices/type/${groupByType.type.id}" class="btn btn-success">Details</a></td>
+                        <td>${devicesCountByType.type.name}</td>
+                        <td>${devicesCountByType.count}</td>
+                        <td>${devicesCountByType.ready}</td>
+                        <td>${devicesCountByType.underService}</td>
+                        <td><a href="/devices/type/${devicesCountByType.type.id}" class="btn btn-success">Details</a></td>
                     </tr>
                 </c:forEach>
             </table>
