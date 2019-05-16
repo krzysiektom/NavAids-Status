@@ -27,8 +27,8 @@
                 <tr>
                     <th colspan="3"></th>
                     <c:forEach items="${groups}" var="group">
-                        <th colspan="2">
-                            <a href="/devices/group/${group.id}">${group.abbr}</a></th>
+                        <th colspan="3">
+                            <a href="/devices/countByTypes/${group.id}">${group.abbr}</a></th>
                     </c:forEach>
                 </tr>
                 <tr>
@@ -38,20 +38,37 @@
                     <c:forEach items="${groups}" var="group">
                         <th>Amount</th>
                         <th>Ready</th>
+                        <th>Under service</th>
                     </c:forEach>
                 </tr>
-                <c:forEach items="${pivotTable}" var="pivotTableByAirfield">
+                <c:forEach items="${pivotTable}" var="pT">
                     <tr>
-                        <td>${pivotTableByAirfield.airfield.owner.superior.abbr}</td>
-                        <td>${pivotTableByAirfield.airfield.owner.abbr}</td>
-                        <td>${pivotTableByAirfield.airfield.abbr}</td>
-                        <c:forEach items="${pivotTableByAirfield.devicesCountByAirfieldAndGroups}" var="device">
+                        <td>
+                            <a href="/devices/superior/${pT.airfield.owner.superior.id}">${pT.airfield.owner.superior.abbr}</a>
+                        </td>
+                        <td>
+                            <a href="/devices/owner/${pT.airfield.owner.id}">${pT.airfield.owner.abbr}</a>
+                        </td>
+                        <td>
+                            <a href="/devices/airfield/${pT.airfield.id}">${pT.airfield.abbr}</a>
+                        </td>
+                        <c:forEach items="${pT.devicesCountByAirfieldAndGroups}" var="device">
+                            <td>${device.count}</td>
                             <td>${device.ready}</td>
                             <td>${device.underService}</td>
                         </c:forEach>
                     </tr>
 
                 </c:forEach>
+                <tr>
+                    <th colspan="3"></th>
+                    <c:forEach items="${sums}" var="sum">
+                        <th>${sum.count}</th>
+                        <th>${sum.ready}</th>
+                        <th>${sum.underService}</th>
+                    </c:forEach>
+                </tr>
+
             </table>
         </div>
     </div>

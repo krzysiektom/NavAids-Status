@@ -16,7 +16,7 @@
 
 <div class="container">
 
-    <header>All devices group by type order by group</header>
+    <header>All devices count by type order by group</header>
 
     <div class="card mt-4">
         <div class="card-body">
@@ -39,7 +39,8 @@
                             <td>${devicesCountByType.count}</td>
                             <td>${devicesCountByType.ready}</td>
                             <td>${devicesCountByType.underService}</td>
-                            <td><a href="/devices/type/${devicesCountByType.type.id}" class="btn btn-success">Details</a></td>
+                            <td><a href="/devices/type/${devicesCountByType.type.id}"
+                                   class="btn btn-success">Details</a></td>
                         </tr>
                     </c:forEach>
                 </c:forEach>

@@ -13,7 +13,9 @@
 <body>
 <%@include file="../fragments/header.jspf" %>
 <div class="container">
-    <header>All devices count by type</header>
+
+    <header>All devices group by ${group.abbr}</header>
+
     <div class="card mt-4">
         <div class="card-body">
 
@@ -35,6 +37,12 @@
                         </td>
                     </tr>
                 </c:forEach>
+                <tr>
+                    <th></th>
+                    <th>${sum.count}</th>
+                    <th>${sum.ready}</th>
+                    <th>${sum.underService}</th>
+                </tr>
             </table>
         </div>
     </div>

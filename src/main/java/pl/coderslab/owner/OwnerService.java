@@ -15,8 +15,16 @@ public class OwnerService {
     @Autowired
     OwnerRepository ownerRepository;
 
+    public Owner findById(Long id) {
+        return ownerRepository.findOne(id);
+    }
+
     public List<Owner> findAllSuperiors() {
         return ownerRepository.findAllBySuperior(ownerRepository.findOne(1L));
+    }
+
+    public List<Owner> findAllBySuperior(Owner owner) {
+        return ownerRepository.findAllBySuperior(owner);
     }
 
     public List<Owner> findAllOwners() {
@@ -31,10 +39,6 @@ public class OwnerService {
                         .collect(Collectors.toList()))
                 .flatMap(Collection::stream)
                 .collect(Collectors.toList());
-    }
-
-    public Owner findById(Long id) {
-        return ownerRepository.findOne(id);
     }
 
     public List<OwnerBySuperior> findAllBySuperior() {

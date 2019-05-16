@@ -8,36 +8,42 @@
     <script src="<c:url value="/webjars/bootstrap/4.3.1/js/bootstrap.min.js"/>"></script>
     <link href="<c:url value="/webjars/bootstrap/4.3.1/css/bootstrap.min.css"/>" rel="stylesheet">
     <link href="<c:url value="/resources/css/main.css"/>" rel="stylesheet">
-    <title>allDevicesGroupByType</title>
+    <title>allDevicesBySuperior</title>
 </head>
 <body>
+
 <%@include file="../fragments/header.jspf" %>
+
 <div class="container">
-    <header>All devices count by type</header>
+
+    <header>All devices by superior: "${superior.abbr}"</header>
+
     <div class="card mt-4">
         <div class="card-body">
 
             <table class="table table-hover">
                 <tr>
                     <th>Type</th>
-                    <th>Amount</th>
-                    <th>Ready</th>
-                    <th>Under-service</th>
+                    <th>Status</th>
                     <th style="width: 15%">Actions</th>
                 </tr>
-                <c:forEach items="${devicesCountByTypes}" var="devicesCountByType">
+                <c:forEach items="${groupByOwners}" var="groupByOwner">
                     <tr>
-                        <td>${devicesCountByType.type.name}</td>
-                        <td>${devicesCountByType.count}</td>
-                        <td>${devicesCountByType.ready}</td>
-                        <td>${devicesCountByType.underService}</td>
-                        <td><a href="/devices/type/${devicesCountByType.type.id}" class="btn btn-success">Details</a>
-                        </td>
+                        <td colspan="3">${groupByOwner.owner.abbr}</td>
                     </tr>
+                    <c:forEach items="${groupByOwner.devices}" var="device">
+                        <tr>
+                            <td>${device.type.name}</td>
+                            <td>${device.ready}</td>
+                            <td><a href="/devices/${device.id}" class="btn btn-success">Details</a></td>
+                        </tr>
+                    </c:forEach>
                 </c:forEach>
             </table>
         </div>
     </div>
 </div>
+
+
 </body>
 </html>

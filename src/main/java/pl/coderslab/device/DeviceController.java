@@ -15,6 +15,8 @@ import pl.coderslab.owner.OwnerService;
 import pl.coderslab.type.Type;
 import pl.coderslab.type.TypeService;
 
+import java.util.List;
+
 @Controller
 @RequestMapping("devices")
 public class DeviceController {
@@ -47,24 +49,6 @@ public class DeviceController {
         return "devices/devicePage";
     }
 
-    @GetMapping("/countByTypes")
-    public String allDevicesGroupByType(Model model) {
-        model.addAttribute("devicesCountByTypes", deviceDTO.countByTypes());
-        return "devices/allDevicesCountByType";
-    }
-
-    @GetMapping("/groupByOwner")
-    public String allDevicesGroupByOwner(Model model) {
-        model.addAttribute("groupByOwners", deviceService.groupByOwner());
-        return "devices/allDevicesGroupByOwner";
-    }
-
-    @GetMapping("/groupByAirfield")
-    public String allDevicesGroupByAirfield(Model model) {
-        model.addAttribute("groupByAirfields", deviceService.groupByAirfield());
-        return "devices/allDevicesGroupByAirfield";
-    }
-
     @GetMapping("type/{id}")
     public String devicesByType(@PathVariable("id") Long id, Model model) {
         Type type = typeService.findById(id);
@@ -79,6 +63,14 @@ public class DeviceController {
         model.addAttribute("owner", owner);
         model.addAttribute("allDevices", deviceService.findAllByOwner(owner));
         return "devices/devicesByOwner";
+    }
+
+    @GetMapping("superior/{id}")
+    public String devicesBySuperior(@PathVariable("id") Long id, Model model) {
+        Owner superior = ownerService.findById(id);
+        model.addAttribute("superior", superior);
+        model.addAttribute("groupByOwners", deviceService.findAllBySuperiorGroupByOwner(superior));
+        return "devices/devicesBySuperior";
     }
 
     @GetMapping("airfield/{id}")
@@ -97,6 +89,37 @@ public class DeviceController {
         return "devices/devicesByGroup";
     }
 
+    @GetMapping("/groupByOwner")
+    public String allDevicesGroupByOwner(Model model) {
+        model.addAttribute("groupByOwners", deviceService.groupByOwner());
+        return "devices/allDevicesGroupByOwner";
+    }
+
+    @GetMapping("/groupByAirfield")
+    public String allDevicesGroupByAirfield(Model model) {
+        model.addAttribute("groupByAirfields", deviceService.groupByAirfield());
+        return "devices/allDevicesGroupByAirfield";
+    }
+
+    @GetMapping("/countByTypes")
+    public String allDevicesGroupByType(Model model) {
+        model.addAttribute("devicesCountByTypes", deviceDTO.countByTypes());
+        return "devices/allDevicesCountByType";
+    }
+
+    @GetMapping("/countByTypes/{id}")
+    public String allDevicesCountByTypeGroupByGroup(@PathVariable Long id, Model model) {
+        Group group = groupService.findById(id);
+        List<DevicesCountByType> devicesCountByTypes = deviceDTO.countByTypes(group);
+        if(devicesCountByTypes.size()==1){
+            return "redirect:/devices/group/"+id;
+        }
+        model.addAttribute("group", group);
+        model.addAttribute("devicesCountByTypes", devicesCountByTypes);
+        model.addAttribute("sum", deviceService.countByGroup(group));
+        return "devices/allDevicesCountByTypeGroupByGroup";
+    }
+
     @GetMapping("/countByTypeOrderByGroup")
     public String allDevicesGroupByTypeOrderByGroup(Model model) {
         model.addAttribute("groupByGroups", deviceService.groupByGroups());
@@ -107,6 +130,7 @@ public class DeviceController {
     public String pivotTable(Model model) {
         model.addAttribute("groups", groupService.findAll());
         model.addAttribute("pivotTable", deviceService.getPivotTableByAirfieldAndGroup());
+        model.addAttribute("sums", deviceService.countByGroup());
         return "devices/pivotTableDevicesByTypesAndOwners";
     }
 }
