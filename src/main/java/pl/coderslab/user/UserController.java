@@ -35,7 +35,7 @@ public class UserController {
         if (userService.isNotExistEmail(user)) {
             userService.save(user);
             userService.setSession(user);
-            return "redirect:/tweet/main";
+            return "redirect:/tweet/main";//???
         } else {
             model.addAttribute("error", true);
             model.addAttribute("errorMsg", "User with this email exists");
@@ -59,7 +59,7 @@ public class UserController {
             user.setId(authHandler.getId());
             userService.save(user);
             userService.setSession(user);
-            return "redirect:/tweet/main";
+            return "redirect:/tweet/main";//??
         } else {
             model.addAttribute("error", true);
             model.addAttribute("errorMsg", "User with this email exists");
@@ -89,7 +89,7 @@ public class UserController {
     @PostMapping("/login")
     public String loginUser(@RequestParam("email") String email, @RequestParam("password") String password, Model model) {
         if (userService.validateUserAndSetSession(email, password)) {
-            return "redirect:/tweet/main";
+            return "redirect:/tweet/main";//??
         } else {
             model.addAttribute("error", true);
             model.addAttribute("errorMsg", "Wrong login or password");

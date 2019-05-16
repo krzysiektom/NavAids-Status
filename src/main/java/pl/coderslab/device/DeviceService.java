@@ -148,13 +148,13 @@ public class DeviceService {
                 .map(group -> new DevicesCountByGroup(group,
                                 dCs.stream()
                                         .filter(dC -> dC.getGroup().equals(group))
-                                        .reduce(0L, (partialCountResult, dc) -> partialCountResult + dc.getCount(), Long::sum),
+                                        .reduce(0L, (partialResult, dc) -> partialResult + dc.getCount(), Long::sum),
                                 dCs.stream()
                                         .filter(dC -> dC.getGroup().equals(group))
-                                        .reduce(0L, (partialCountResult, dc) -> partialCountResult + dc.getReady(), Long::sum),
+                                        .reduce(0L, (partialResult, dc) -> partialResult + dc.getReady(), Long::sum),
                                 dCs.stream()
                                         .filter(dC -> dC.getGroup().equals(group))
-                                        .reduce(0L, (partialCountResult, dc) -> partialCountResult + dc.getUnderService(), Long::sum)
+                                        .reduce(0L, (partialResult, dc) -> partialResult + dc.getUnderService(), Long::sum)
                         )
                 )
                 .collect(Collectors.toList());
@@ -165,11 +165,11 @@ public class DeviceService {
 
         return new DevicesCountByGroup(group,
                 dCs.stream()
-                        .reduce(0L, (partialCountResult, dc) -> partialCountResult + dc.getCount(), Long::sum),
+                        .reduce(0L, (partialResult, dc) -> partialResult + dc.getCount(), Long::sum),
                 dCs.stream()
-                        .reduce(0L, (partialCountResult, dc) -> partialCountResult + dc.getReady(), Long::sum),
+                        .reduce(0L, (partialResult, dc) -> partialResult + dc.getReady(), Long::sum),
                 dCs.stream()
-                        .reduce(0L, (partialCountResult, dc) -> partialCountResult + dc.getUnderService(), Long::sum)
+                        .reduce(0L, (partialResult, dc) -> partialResult + dc.getUnderService(), Long::sum)
         );
     }
 
