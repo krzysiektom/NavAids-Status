@@ -39,13 +39,13 @@ public class DeviceController {
 
     @GetMapping("/")
     public String allDevices(Model model) {
-        model.addAttribute("allDevices", deviceService.findAll());
+        model.addAttribute("allDevices", deviceRepository.findAll());
         return "devices/allDevices";
     }
 
     @GetMapping("/{id}")
     public String deviceDetails(@PathVariable("id") Long id, Model model) {
-        model.addAttribute("device", deviceService.findById(id));
+        model.addAttribute("device", deviceRepository.findOne(id));
         return "devices/devicePage";
     }
 
@@ -53,7 +53,7 @@ public class DeviceController {
     public String devicesByType(@PathVariable("id") Long id, Model model) {
         Type type = typeService.findById(id);
         model.addAttribute("type", type);
-        model.addAttribute("allDevices", deviceService.findAllByType(type));
+        model.addAttribute("allDevices", deviceRepository.findAllByType(type));
         return "devices/devicesByType";
     }
 
@@ -61,7 +61,7 @@ public class DeviceController {
     public String devicesByOwner(@PathVariable("id") Long id, Model model) {
         Owner owner = ownerService.findById(id);
         model.addAttribute("owner", owner);
-        model.addAttribute("allDevices", deviceService.findAllByOwner(owner));
+        model.addAttribute("allDevices", deviceRepository.findAllByOwner(owner));
         return "devices/devicesByOwner";
     }
 
@@ -77,7 +77,7 @@ public class DeviceController {
     public String devicesByAirfield(@PathVariable("id") Long id, Model model) {
         Airfield airfield = airfieldService.findById(id);
         model.addAttribute("airfield", airfield);
-        model.addAttribute("allDevices", deviceService.findAllByAirfield(airfield));
+        model.addAttribute("allDevices", deviceRepository.findAllByAirfield(airfield));
         return "devices/devicesByAirfield";
     }
 

@@ -8,7 +8,7 @@
     <script src="<c:url value="/webjars/bootstrap/4.3.1/js/bootstrap.min.js"/>"></script>
     <link href="<c:url value="/webjars/bootstrap/4.3.1/css/bootstrap.min.css"/>" rel="stylesheet">
     <link href="<c:url value="/resources/css/main.css"/>" rel="stylesheet">
-    <title>devicesCountByType</title>
+    <title>fixPage</title>
 </head>
 <body>
 
@@ -16,7 +16,7 @@
 
 <div class="container">
 
-    <header>All devices by type: "${type.name}"</header>
+    <header>Fix page"</header>
 
 
     <div class="card mt-4">
@@ -24,17 +24,17 @@
 
             <table class="table table-hover">
                 <tr>
-                    <th>Airfield</th>
-                    <th>Status</th>
-                    <th style="width: 15%">Actions</th>
+                    <th>Failure</th>
+                    <th>Done</th>
+                    <th>Used materials</th>
+                    <th>Created</th>
                 </tr>
-                <c:forEach items="${allDevices}" var="device">
                     <tr>
-                        <td>${device.airfield.abbr}</td>
-                        <td>${device.ready}</td>
-                        <td><a href="/devices/${device.id}" class="btn btn-success btn-sm">Details</a></td>
+                        <td>${fix.failure.description}</td>
+                        <td>${fix.done}</td>
+                        <td>${fix.usedMaterials}</td>
+                        <td>${fix.created}</td>
                     </tr>
-                </c:forEach>
             </table>
         </div>
     </div>

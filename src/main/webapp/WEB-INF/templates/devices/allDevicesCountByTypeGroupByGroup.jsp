@@ -33,7 +33,7 @@
                         <td>${devicesCountByType.count}</td>
                         <td>${devicesCountByType.ready}</td>
                         <td>${devicesCountByType.underService}</td>
-                        <td><a href="/devices/type/${devicesCountByType.type.id}" class="btn btn-success">Details</a>
+                        <td><a href="/devices/type/${devicesCountByType.type.id}" class="btn btn-success btn-sm">Details</a>
                         </td>
                     </tr>
                 </c:forEach>

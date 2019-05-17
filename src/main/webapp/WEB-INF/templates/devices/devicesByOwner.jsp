@@ -34,7 +34,7 @@
                         <td>${device.airfield.abbr}</td>
                         <td>${device.type.name}</td>
                         <td>${device.ready}</td>
-                        <td><a href="/devices/${device.id}" class="btn btn-success">Details</a></td>
+                        <td><a href="/devices/${device.id}" class="btn btn-success btn-sm">Details</a></td>
                     </tr>
                 </c:forEach>
             </table>

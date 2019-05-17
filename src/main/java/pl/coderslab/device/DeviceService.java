@@ -30,26 +30,6 @@ public class DeviceService {
     @Autowired
     private GroupService groupService;
 
-    public Device findById(Long id) {
-        return deviceRepository.findOne(id);
-    }
-
-    public List<Device> findAll() {
-        return deviceRepository.findAll();
-    }
-
-    public List<Device> findAllByType(Type type) {
-        return deviceRepository.findAllByType(type);
-    }
-
-    public List<Device> findAllByOwner(Owner owner) {
-        return deviceRepository.findAllByOwner(owner);
-    }
-
-    public List<Device> findAllByAirfield(Airfield airfield) {
-        return deviceRepository.findAllByAirfield(airfield);
-    }
-
     public List<DevicesByOwner> groupByOwner() {
         List<Owner> owners = ownerService.findAllOwners();
         List<Device> devices = deviceRepository.findAll();
