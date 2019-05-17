@@ -56,7 +56,7 @@ public class UserController {
             return "formUser";
         }
         if (userService.isNotExistAnotherUserWithEmail(user)) {
-            user.setId(authHandler.getId());
+            user.setId(authHandler.getUser().getId());
             userService.save(user);
             userService.setSession(user);
             return "redirect:/tweet/main";//??
@@ -70,7 +70,7 @@ public class UserController {
     @GetMapping("/delete")
     public String deleteUser() {
         if (authHandler.isLogged()) {
-            userService.delete(authHandler.getId());
+            userService.delete(authHandler.getUser().getId());
         }
         return "redirect:/";
     }

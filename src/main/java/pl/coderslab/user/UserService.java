@@ -25,7 +25,7 @@ public class UserService {
     }
 
     void setSession(User user) {
-        authHandler.setId(user.getId());
+        authHandler.setUser(user);
         authHandler.setLogged(true);
     }
 
@@ -36,7 +36,7 @@ public class UserService {
 
     boolean isNotExistAnotherUserWithEmail(User userValidate) {
         User user = userRepository.findByEmail(userValidate.getEmail());
-        return null == user || authHandler.getId().equals(user.getId());
+        return null == user || authHandler.getUser().getId().equals(user.getId());
     }
 
     void save(User user) {

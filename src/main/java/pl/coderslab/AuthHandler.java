@@ -12,28 +12,23 @@ import java.util.List;
 @Scope(value = "session", proxyMode = ScopedProxyMode.TARGET_CLASS)
 public class AuthHandler {
 
-    private Long id;
+    private User user;
     private boolean isLogged;
-    private List<Airfield> airfields;
 
     public AuthHandler() {
     }
 
-    public AuthHandler(Long id, boolean isLogged) {
-        this.id = id;
+    public AuthHandler(User user, boolean isLogged) {
+        this.user = user;
         this.isLogged = isLogged;
     }
 
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
     public User getUser() {
-        return new User(id);
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
     }
 
     public boolean isLogged() {
@@ -42,13 +37,5 @@ public class AuthHandler {
 
     public void setLogged(boolean logged) {
         isLogged = logged;
-    }
-
-    public List<Airfield> getAirfields() {
-        return airfields;
-    }
-
-    public void setAirfields(List<Airfield> airfields) {
-        this.airfields = airfields;
     }
 }

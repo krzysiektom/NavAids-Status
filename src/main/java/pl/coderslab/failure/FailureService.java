@@ -11,19 +11,5 @@ import java.util.List;
 @Service
 @Transactional
 public class FailureService {
-    @Autowired
-    FailureRepository failureRepository;
-    @Autowired
-    FixRepository fixRepository;
 
-    public List<Failure> findAll() {
-        return failureRepository.findAll();
-    }
-    public Failure findOne(Long id) {
-        return failureRepository.findOne(id);
-    }
-
-    public List<Fix> findAllByFailure(Failure failure) {
-    return fixRepository.findAllByFailure(failure);
-    }
 }

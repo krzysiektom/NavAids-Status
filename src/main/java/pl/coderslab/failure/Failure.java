@@ -20,6 +20,7 @@ public class Failure {
     private User user;
 
     private String description;
+    private boolean isFixed;
     private LocalDateTime created;
     private LocalDateTime finished;
 
@@ -58,6 +59,14 @@ public class Failure {
         this.description = description;
     }
 
+    public boolean isFixed() {
+        return isFixed;
+    }
+
+    public void setFixed(boolean fixed) {
+        isFixed = fixed;
+    }
+
     public LocalDateTime getCreated() {
         return created;
     }
@@ -72,5 +81,18 @@ public class Failure {
 
     public void setFinished(LocalDateTime finished) {
         this.finished = finished;
+    }
+
+    @Override
+    public String toString() {
+        return "Failure{" +
+                "id=" + id +
+                ", device=" + device +
+                ", user=" + user +
+                ", description='" + description + '\'' +
+                ", isFixed=" + isFixed +
+                ", created=" + created +
+                ", finished=" + finished +
+                '}';
     }
 }

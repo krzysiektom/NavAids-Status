@@ -63,27 +63,24 @@
     <div class="card mt-4">
         <div class="card-body">
 
-            <table class="table table-hover"><b>Fixes details:</b>
+            <table class="table table-hover"><b>Fixes details:</b> <a href="/fixes/add/${failure.id}" class="btn btn-success btn-sm float-right">New fix</a>
                 <tr>
 
                     <th>Done</th>
-                    <th>Used materials</th>
                     <th>Created</th>
                     <th>Action</th>
                 </tr>
                 <c:forEach items="${allFixes}" var="fix">
                     <tr>
                         <td>${fix.done}</td>
-                        <td>${fix.usedMaterials}</td>
                         <td>${fix.created}</td>
-                        <td><a href="#details${fix.id}" class="btn btn-success btn-sm" data-toggle="collapse">Details</a></td>
+                        <td><a href="#details${fix.id}" class="btn btn-success btn-sm"
+                               data-toggle="collapse">Details</a></td>
                     </tr>
                     <tr>
-                        <td colspan="4" id="details${fix.id}" class="collapse" >
-                                ${fix.id}
-                            Lorem ipsum dolor sit amet, consectetur adipisicing elit,
-                            sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-                            quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+                        <td colspan="4" id="details${fix.id}" class="collapse">
+                            <b>Used materials:</b> ${fix.usedMaterials}<br>
+                            <b>Created by:</b> ${fix.user.firstName} ${fix.user.firstName}
                         </td>
                     </tr>
                 </c:forEach>
