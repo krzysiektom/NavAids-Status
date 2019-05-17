@@ -1,6 +1,7 @@
 package pl.coderslab.failure;
 
 import pl.coderslab.device.Device;
+import pl.coderslab.user.User;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
@@ -14,6 +15,9 @@ public class Failure {
 
     @ManyToOne
     private Device device;
+
+    @ManyToOne
+    private User user;
 
     private String description;
     private LocalDateTime created;
@@ -36,6 +40,14 @@ public class Failure {
 
     public void setDevice(Device device) {
         this.device = device;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
     }
 
     public String getDescription() {

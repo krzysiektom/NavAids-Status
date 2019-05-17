@@ -48,10 +48,12 @@
                 <tr>
 
                     <th>Description</th>
+                    <th>Created by</th>
                     <th>Created</th>
                 </tr>
                 <tr>
                     <td>${failure.description}</td>
+                    <td>${failure.user.firstName} ${failure.user.lastName}</td>
                     <td>${failure.created}</td>
                 </tr>
             </table>
