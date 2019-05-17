@@ -29,8 +29,6 @@ public class DeviceService {
     private OwnerService ownerService;
     @Autowired
     private GroupService groupService;
-    @Autowired
-    DeviceDTO deviceDTO;
 
     public Device findById(Long id) {
         return deviceRepository.findOne(id);
@@ -94,7 +92,7 @@ public class DeviceService {
     public List<DevicesCountByTypeOrderByGroup> groupByGroups() {
         List<Group> groups = groupService.findAll();
         List<Type> types = typeService.findAll();
-        List<DevicesCountByType> devicesCountByTypes = deviceDTO.countByTypes();
+        List<DevicesCountByType> devicesCountByTypes = deviceRepository.countByTypes();
 
         return groups.stream()
                 .map(group ->
@@ -129,7 +127,7 @@ public class DeviceService {
 
     public List<DevicesPivotTableByAirfieldAndGroup> getPivotTableByAirfieldAndGroup() {
         List<Airfield> airfields = airfieldService.findAll();
-        List<DevicesCountByAirfieldAndGroup> devicesCountByAirfieldAndGroups = deviceDTO.countByAirfieldAndGroup();
+        List<DevicesCountByAirfieldAndGroup> devicesCountByAirfieldAndGroups = deviceRepository.countByAirfieldAndGroup();
 
         return airfields.stream()
                 .map(airfield -> new DevicesPivotTableByAirfieldAndGroup(
@@ -142,7 +140,7 @@ public class DeviceService {
 
     public List<DevicesCountByGroup> countByGroup() {
         List<Group> groups = groupService.findAll();
-        List<DevicesCountByAirfieldAndGroup> dCs = deviceDTO.countByAirfieldAndGroup();
+        List<DevicesCountByAirfieldAndGroup> dCs = deviceRepository.countByAirfieldAndGroup();
 
         return groups.stream()
                 .map(group -> new DevicesCountByGroup(group,
@@ -161,7 +159,7 @@ public class DeviceService {
     }
 
     public DevicesCountByGroup countByGroup(Group group) {
-        List<DevicesCountByType> dCs = deviceDTO.countByTypes(group);
+        List<DevicesCountByType> dCs = deviceRepository.countByTypes(group);
 
         return new DevicesCountByGroup(group,
                 dCs.stream()

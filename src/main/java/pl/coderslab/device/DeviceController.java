@@ -31,7 +31,7 @@ public class DeviceController {
     @Autowired
     private GroupService groupService;
     @Autowired
-    private DeviceDTO deviceDTO;
+    private DeviceRepository deviceRepository;
 
     public DeviceController(DeviceService deviceService) {
         this.deviceService = deviceService;
@@ -103,14 +103,14 @@ public class DeviceController {
 
     @GetMapping("/countByTypes")
     public String allDevicesGroupByType(Model model) {
-        model.addAttribute("devicesCountByTypes", deviceDTO.countByTypes());
+        model.addAttribute("devicesCountByTypes", deviceRepository.countByTypes());
         return "devices/allDevicesCountByType";
     }
 
     @GetMapping("/countByTypes/{id}")
     public String allDevicesCountByTypeGroupByGroup(@PathVariable Long id, Model model) {
         Group group = groupService.findById(id);
-        List<DevicesCountByType> devicesCountByTypes = deviceDTO.countByTypes(group);
+        List<DevicesCountByType> devicesCountByTypes = deviceRepository.countByTypes(group);
         if(devicesCountByTypes.size()==1){
             return "redirect:/devices/group/"+id;
         }
