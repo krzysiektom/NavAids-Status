@@ -18,7 +18,7 @@
     <header>All devices</header>
 
 
-    <div class="card mt-4">
+    <div class="card mt-3">
         <div class="card-body">
 
             <table class="table table-hover">
@@ -26,7 +26,7 @@
                     <th>Airfield</th>
                     <th>Type</th>
                     <th>Status</th>
-                    <th style="width: 15%">Actions</th>
+                    <th>Actions</th>
                 </tr>
                 <c:forEach items="${allDevices}" var="device">
                     <tr>
@@ -34,6 +34,7 @@
                         <td>${device.type.name}</td>
                         <td>${device.ready}</td>
                         <td><a href="/devices/${device.id}" class="btn btn-success btn-sm">Details</a>
+                            <a href="/failures/add/${device.id}" class="btn btn-success btn-sm">Add failure</a>
                         </td>
                     </tr>
                 </c:forEach>

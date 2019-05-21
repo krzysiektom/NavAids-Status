@@ -24,13 +24,13 @@ public class UserController {
     public String addForm(Model model) {
         User user = new User();
         model.addAttribute(user);
-        return "formUser";
+        return "users/userForm";
     }
 
     @PostMapping("/add")
     public String addUser(@ModelAttribute("user") @Valid User user, BindingResult result, Model model) {
         if (result.hasErrors()) {
-            return "formUser";
+            return "users/userForm";
         }
         if (userService.isNotExistEmail(user)) {
             userService.save(user);
@@ -39,7 +39,7 @@ public class UserController {
         } else {
             model.addAttribute("error", true);
             model.addAttribute("errorMsg", "User with this email exists");
-            return "formUser";
+            return "users/userForm";
         }
     }
 
@@ -47,13 +47,13 @@ public class UserController {
     public String editForm(Model model) {
         User user = authHandler.getUser();
         model.addAttribute("user", user);
-        return "formUser";
+        return "users/userForm";
     }
 
     @PostMapping("/edit")
     public String editUser(@ModelAttribute("user") @Valid User user, BindingResult result, Model model) {
         if (result.hasErrors()) {
-            return "formUser";
+            return "users/userForm";
         }
         if (userService.isNotExistAnotherUserWithEmail(user)) {
             user.setId(authHandler.getUser().getId());
@@ -63,7 +63,7 @@ public class UserController {
         } else {
             model.addAttribute("error", true);
             model.addAttribute("errorMsg", "User with this email exists");
-            return "formUser";
+            return "users/userForm";
         }
     }
 
@@ -83,7 +83,7 @@ public class UserController {
 
     @GetMapping("/login")
     public String loginForm() {
-        return "loginPage";
+        return "users/loginPage";
     }
 
     @PostMapping("/login")
@@ -93,12 +93,8 @@ public class UserController {
         } else {
             model.addAttribute("error", true);
             model.addAttribute("errorMsg", "Wrong login or password");
-            return "loginPage";
+            return "users/loginPage";
         }
     }
 
-    @GetMapping("/page")
-    public String userPage() {
-        return "userPage";
-    }
 }

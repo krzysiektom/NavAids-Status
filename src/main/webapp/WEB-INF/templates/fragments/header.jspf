@@ -72,11 +72,24 @@
                 <li class="nav-item dropdown float-right">
                     <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink" data-toggle="dropdown"
                        aria-haspopup="true" aria-expanded="false">
+                        Admin
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                        <a class="dropdown-item" href="/users/login">Add owner</a>
+                        <a class="dropdown-item" href="/users/login">Add airfield</a>
+                        <a class="dropdown-item" href="/users/add">Add group</a>
+                        <a class="dropdown-item" href="/users/add">Add type</a>
+                        <a class="dropdown-item" href="/users/add">Add device</a>
+                    </div>
+                </li>
+                <li class="nav-item dropdown float-right">
+                    <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink" data-toggle="dropdown"
+                       aria-haspopup="true" aria-expanded="false">
                         User
                     </a>
                     <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
                         <a class="dropdown-item" href="/users/login">Login</a>
-                        <a class="dropdown-item" href="/users/logout">Register</a>
+                        <a class="dropdown-item" href="/users/add">Register</a>
                     </div>
                 </li>
             </ul>

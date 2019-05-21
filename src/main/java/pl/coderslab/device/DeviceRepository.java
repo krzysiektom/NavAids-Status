@@ -9,7 +9,7 @@ import pl.coderslab.type.Type;
 
 import java.util.List;
 
-interface DeviceRepository extends JpaRepository<Device, Long> {
+public interface DeviceRepository extends JpaRepository<Device, Long> {
 
     @Query("SELECT new pl.coderslab.device.DevicesCountByType(d.type, " +
             "count(d), " +

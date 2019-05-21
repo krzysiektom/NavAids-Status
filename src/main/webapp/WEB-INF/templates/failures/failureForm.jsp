@@ -14,7 +14,7 @@
 
 <%@include file="../fragments/header.jspf" %>
 
-<form:form method="post" modelAttribute="fix">
+<form:form method="post" modelAttribute="failureAndFix">
 
     <div class="container">
         <header>Add fix</header>
@@ -22,6 +22,13 @@
         <div class="card mt-4">
             <div class="card-body">
 
+                <div class="row">
+                    <div class="form-group col-md-4">
+                        <label for="doneId">Description:</label>
+                        <form:input path="description" class="form-control" id="doneId"/>
+                        <form:errors path="description" element="div" cssClass="error"/>
+                    </div>
+                </div>
                 <div class="row">
                     <div class="form-group col-md-4">
                         <label for="doneId">Done:</label>
@@ -36,10 +43,6 @@
                         <form:input path="usedMaterials" class="form-control" id="usedMaterialsId"/>
                         <form:errors path="usedMaterials" element="div" cssClass="error"/>
                     </div>
-                </div>
-                <div class="form-check">
-                    <input type="checkbox" name="isRepaired" class="form-check-input" id="isRepaired">
-                    <label class="form-check-label" for="isRepaired">Repaired</label>
                 </div>
                 <input type="submit" value="Save"/>
 

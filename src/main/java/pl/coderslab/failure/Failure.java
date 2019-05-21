@@ -1,5 +1,6 @@
 package pl.coderslab.failure;
 
+import org.hibernate.validator.constraints.NotBlank;
 import pl.coderslab.device.Device;
 import pl.coderslab.user.User;
 
@@ -19,10 +20,17 @@ public class Failure {
     @ManyToOne
     private User user;
 
+    @NotBlank
     private String description;
     private boolean isFixed;
     private LocalDateTime created;
     private LocalDateTime finished;
+
+    @PrePersist
+    public void prePersist() {
+        created = LocalDateTime.now();
+    }
+
 
     public Failure() {
     }
