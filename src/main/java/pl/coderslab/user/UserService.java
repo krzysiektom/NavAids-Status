@@ -9,11 +9,13 @@ import java.util.List;
 
 @Service
 public class UserService {
-    @Autowired
-    private UserRepository userRepository;
-    @Autowired
-    private AuthHandler authHandler;
+    private final UserRepository userRepository;
+    private final AuthHandler authHandler;
 
+    public UserService(UserRepository userRepository, AuthHandler authHandler) {
+        this.userRepository = userRepository;
+        this.authHandler = authHandler;
+    }
 
     boolean validateUserAndSetSession(String email, String password) {
         User user = userRepository.findByEmail(email);
@@ -39,15 +41,4 @@ public class UserService {
         return null == user || authHandler.getUser().getId().equals(user.getId());
     }
 
-    void save(User user) {
-        userRepository.save(user);
-    }
-
-    void delete(Long id) {
-        userRepository.delete(id);
-    }
-
-    public List<User> findAllWithOutUser(User user) {
-        return userRepository.findAllWithOutUser(user);
-    }
 }

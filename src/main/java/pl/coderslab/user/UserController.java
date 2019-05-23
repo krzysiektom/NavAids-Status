@@ -12,12 +12,13 @@ import javax.validation.Valid;
 @RequestMapping("/users")
 public class UserController {
     private final UserService userService;
-
     private final AuthHandler authHandler;
+    private final UserRepository userRepository;
 
-    public UserController(UserService userService, AuthHandler authHandler) {
+    public UserController(UserService userService, AuthHandler authHandler, UserRepository userRepository) {
         this.userService = userService;
         this.authHandler = authHandler;
+        this.userRepository = userRepository;
     }
 
     @GetMapping("/add")
@@ -33,7 +34,7 @@ public class UserController {
             return "users/userForm";
         }
         if (userService.isNotExistEmail(user)) {
-            userService.save(user);
+            userRepository.save(user);
             userService.setSession(user);
             return "redirect:/tweet/main";//???
         } else {
@@ -57,7 +58,7 @@ public class UserController {
         }
         if (userService.isNotExistAnotherUserWithEmail(user)) {
             user.setId(authHandler.getUser().getId());
-            userService.save(user);
+            userRepository.save(user);
             userService.setSession(user);
             return "redirect:/tweet/main";//??
         } else {
@@ -70,7 +71,7 @@ public class UserController {
     @GetMapping("/delete")
     public String deleteUser() {
         if (authHandler.isLogged()) {
-            userService.delete(authHandler.getUser().getId());
+            userRepository.delete(authHandler.getUser());
         }
         return "redirect:/";
     }
