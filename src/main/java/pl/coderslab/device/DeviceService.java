@@ -4,13 +4,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import pl.coderslab.airfield.Airfield;
-import pl.coderslab.airfield.AirfieldService;
+import pl.coderslab.airfield.AirfieldRepository;
 import pl.coderslab.group.Group;
-import pl.coderslab.group.GroupService;
+import pl.coderslab.group.GroupRepository;
 import pl.coderslab.owner.Owner;
+import pl.coderslab.owner.OwnerRepository;
 import pl.coderslab.owner.OwnerService;
 import pl.coderslab.type.Type;
-import pl.coderslab.type.TypeService;
+import pl.coderslab.type.TypeRepository;
 
 import java.util.Collection;
 import java.util.List;
@@ -22,13 +23,15 @@ public class DeviceService {
     @Autowired
     private DeviceRepository deviceRepository;
     @Autowired
-    private TypeService typeService;
+    private TypeRepository typeRepository;
     @Autowired
-    private AirfieldService airfieldService;
+    private AirfieldRepository airfieldRepository;
     @Autowired
     private OwnerService ownerService;
     @Autowired
-    private GroupService groupService;
+    private OwnerRepository ownerRepository;
+    @Autowired
+    private GroupRepository groupRepository;
 
     public List<DevicesByOwner> groupByOwner() {
         List<Owner> owners = ownerService.findAllOwners();
@@ -44,7 +47,7 @@ public class DeviceService {
     }
 
     public List<DevicesByOwner> findAllBySuperiorGroupByOwner(Owner superior) {
-        List<Owner> owners = ownerService.findAllBySuperior(superior);
+        List<Owner> owners = ownerRepository.findAllBySuperior(superior);
         List<Device> devices = deviceRepository.findAllByOwnerIn(owners);
 
         return owners.stream()
@@ -57,7 +60,7 @@ public class DeviceService {
     }
 
     public List<DevicesByAirfield> groupByAirfield() {
-        List<Airfield> airfields = airfieldService.findAll();
+        List<Airfield> airfields = airfieldRepository.findAll();
         List<Device> devices = deviceRepository.findAll();
 
         return airfields.stream()
@@ -70,8 +73,8 @@ public class DeviceService {
     }
 
     public List<DevicesCountByTypeOrderByGroup> groupByGroups() {
-        List<Group> groups = groupService.findAll();
-        List<Type> types = typeService.findAll();
+        List<Group> groups = groupRepository.findAll();
+        List<Type> types = typeRepository.findAll();
         List<DevicesCountByType> devicesCountByTypes = deviceRepository.countByTypes();
 
         return groups.stream()
@@ -91,7 +94,7 @@ public class DeviceService {
     }
 
     public List<DevicesByType> findAllByGroup(Group group) {
-        List<Type> types = typeService.findAllByGroup(group);
+        List<Type> types = typeRepository.findAllByGroup(group);
         List<Device> devices = deviceRepository.findAllByTypeIn(types);
 
         return types.stream()
@@ -106,7 +109,7 @@ public class DeviceService {
     }
 
     public List<DevicesPivotTableByAirfieldAndGroup> getPivotTableByAirfieldAndGroup() {
-        List<Airfield> airfields = airfieldService.findAll();
+        List<Airfield> airfields = airfieldRepository.findAll();
         List<DevicesCountByAirfieldAndGroup> devicesCountByAirfieldAndGroups = deviceRepository.countByAirfieldAndGroup();
 
         return airfields.stream()
@@ -119,7 +122,7 @@ public class DeviceService {
     }
 
     public List<DevicesCountByGroup> countByGroup() {
-        List<Group> groups = groupService.findAll();
+        List<Group> groups = groupRepository.findAll();
         List<DevicesCountByAirfieldAndGroup> dCs = deviceRepository.countByAirfieldAndGroup();
 
         return groups.stream()

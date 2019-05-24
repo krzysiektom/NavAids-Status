@@ -15,20 +15,8 @@ public class OwnerService {
     @Autowired
     OwnerRepository ownerRepository;
 
-    public Owner findById(Long id) {
-        return ownerRepository.findOne(id);
-    }
-
-    public List<Owner> findAllSuperiors() {
-        return ownerRepository.findAllBySuperior(ownerRepository.findOne(1L));
-    }
-
-    public List<Owner> findAllBySuperior(Owner owner) {
-        return ownerRepository.findAllBySuperior(owner);
-    }
-
     public List<Owner> findAllOwners() {
-        List<Owner> superiors = findAllSuperiors();
+        List<Owner> superiors = ownerRepository.findAllBySuperior(ownerRepository.findOne(1L));
         List<Owner> ownerList = ownerRepository.findAll();
         ownerList.removeAll(superiors);
         ownerList.remove(ownerRepository.findOne(1L));
@@ -42,7 +30,7 @@ public class OwnerService {
     }
 
     public List<OwnerBySuperior> findAllBySuperior() {
-        List<Owner> superiors = findAllSuperiors();
+        List<Owner> superiors = ownerRepository.findAllBySuperior(ownerRepository.findOne(1L));
         List<Owner> ownerList = ownerRepository.findAll();
         ownerList.removeAll(superiors);
         ownerList.remove(ownerRepository.findOne(1L));

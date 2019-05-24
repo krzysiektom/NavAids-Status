@@ -7,13 +7,14 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import pl.coderslab.airfield.Airfield;
-import pl.coderslab.airfield.AirfieldService;
+import pl.coderslab.airfield.AirfieldRepository;
 import pl.coderslab.group.Group;
-import pl.coderslab.group.GroupService;
+import pl.coderslab.group.GroupRepository;
 import pl.coderslab.owner.Owner;
+import pl.coderslab.owner.OwnerRepository;
 import pl.coderslab.owner.OwnerService;
 import pl.coderslab.type.Type;
-import pl.coderslab.type.TypeService;
+import pl.coderslab.type.TypeRepository;
 
 import java.util.List;
 
@@ -23,13 +24,15 @@ public class DeviceController {
     private final DeviceService deviceService;
 
     @Autowired
-    private TypeService typeService;
+    private TypeRepository typeRepository;
     @Autowired
     private OwnerService ownerService;
     @Autowired
-    private AirfieldService airfieldService;
+    private OwnerRepository ownerRepository;
     @Autowired
-    private GroupService groupService;
+    private AirfieldRepository airfieldRepository;
+    @Autowired
+    private GroupRepository groupRepository;
     @Autowired
     private DeviceRepository deviceRepository;
 
@@ -51,7 +54,7 @@ public class DeviceController {
 
     @GetMapping("type/{id}")
     public String devicesByType(@PathVariable("id") Long id, Model model) {
-        Type type = typeService.findById(id);
+        Type type = typeRepository.findOne(id);
         model.addAttribute("type", type);
         model.addAttribute("allDevices", deviceRepository.findAllByType(type));
         return "devices/devicesByType";
@@ -59,7 +62,7 @@ public class DeviceController {
 
     @GetMapping("owner/{id}")
     public String devicesByOwner(@PathVariable("id") Long id, Model model) {
-        Owner owner = ownerService.findById(id);
+        Owner owner = ownerRepository.findOne(id);
         model.addAttribute("owner", owner);
         model.addAttribute("allDevices", deviceRepository.findAllByOwner(owner));
         return "devices/devicesByOwner";
@@ -67,7 +70,7 @@ public class DeviceController {
 
     @GetMapping("superior/{id}")
     public String devicesBySuperior(@PathVariable("id") Long id, Model model) {
-        Owner superior = ownerService.findById(id);
+        Owner superior = ownerRepository.findOne(id);
         model.addAttribute("superior", superior);
         model.addAttribute("groupByOwners", deviceService.findAllBySuperiorGroupByOwner(superior));
         return "devices/devicesBySuperior";
@@ -75,7 +78,7 @@ public class DeviceController {
 
     @GetMapping("airfield/{id}")
     public String devicesByAirfield(@PathVariable("id") Long id, Model model) {
-        Airfield airfield = airfieldService.findById(id);
+        Airfield airfield = airfieldRepository.findOne(id);
         model.addAttribute("airfield", airfield);
         model.addAttribute("allDevices", deviceRepository.findAllByAirfield(airfield));
         return "devices/devicesByAirfield";
@@ -83,7 +86,7 @@ public class DeviceController {
 
     @GetMapping("group/{id}")
     public String devicesByGroup(@PathVariable("id") Long id, Model model) {
-        Group group = groupService.findById(id);
+        Group group = groupRepository.findOne(id);
         model.addAttribute("group", group);
         model.addAttribute("devicesByGroups", deviceService.findAllByGroup(group));
         return "devices/devicesByGroup";
@@ -109,7 +112,7 @@ public class DeviceController {
 
     @GetMapping("/countByTypes/{id}")
     public String allDevicesCountByTypeGroupByGroup(@PathVariable Long id, Model model) {
-        Group group = groupService.findById(id);
+        Group group = groupRepository.findOne(id);
         List<DevicesCountByType> devicesCountByTypes = deviceRepository.countByTypes(group);
         if(devicesCountByTypes.size()==1){
             return "redirect:/devices/group/"+id;
@@ -128,7 +131,7 @@ public class DeviceController {
 
     @GetMapping("/pivotTable")
     public String pivotTable(Model model) {
-        model.addAttribute("groups", groupService.findAll());
+        model.addAttribute("groups", groupRepository.findAll());
         model.addAttribute("pivotTable", deviceService.getPivotTableByAirfieldAndGroup());
         model.addAttribute("sums", deviceService.countByGroup());
         return "devices/pivotTableDevicesByTypesAndOwners";

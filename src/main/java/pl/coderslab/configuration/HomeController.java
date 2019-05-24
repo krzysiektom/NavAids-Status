@@ -6,7 +6,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import pl.coderslab.AuthHandler;
-import pl.coderslab.airfield.AirfieldService;
+import pl.coderslab.airfield.AirfieldRepository;
 import pl.coderslab.owner.OwnerService;
 import pl.coderslab.user.UserRepository;
 
@@ -14,7 +14,7 @@ import pl.coderslab.user.UserRepository;
 @SessionAttributes({"AllAirfields", "AllOwners"})
 public class HomeController {
     @Autowired
-    AirfieldService airfieldService;
+    AirfieldRepository airfieldRepository;
 
     @Autowired
     OwnerService ownerService;
@@ -26,7 +26,7 @@ public class HomeController {
 
     @GetMapping("/")
     public String homePage(Model model) {
-        model.addAttribute("AllAirfields", airfieldService.findAll());
+        model.addAttribute("AllAirfields", airfieldRepository.findAll());
         model.addAttribute("AllOwners", ownerService.findAllBySuperior());
         authHandler.setUser(userRepository.findOne(1L));
         authHandler.setLogged(true);

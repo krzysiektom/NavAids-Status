@@ -5,6 +5,6 @@ import pl.coderslab.group.Group;
 
 import java.util.List;
 
-interface TypeRepository extends JpaRepository<Type, Long> {
+public interface TypeRepository extends JpaRepository<Type, Long> {
     List<Type> findAllByGroup(Group group);
 }
