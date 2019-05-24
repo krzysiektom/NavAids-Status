@@ -41,7 +41,7 @@ public class FixServiceTest {
     private Long failureId;
 
     @Before
-    public void setUp() throws Exception {
+    public void setUp() {
         device = new Device();
         failure = new Failure();
         failure.setId(1L);
