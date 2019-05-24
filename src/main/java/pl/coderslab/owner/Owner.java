@@ -17,6 +17,11 @@ public class Owner {
     public Owner() {
     }
 
+    public Owner(Long id, Owner superior) {
+        this.id = id;
+        this.superior = superior;
+    }
+
     public Long getId() {
         return id;
     }

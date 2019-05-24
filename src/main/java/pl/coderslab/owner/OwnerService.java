@@ -1,6 +1,5 @@
 package pl.coderslab.owner;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -12,14 +11,15 @@ import java.util.stream.Collectors;
 @Transactional
 public class OwnerService {
 
-    @Autowired
-    OwnerRepository ownerRepository;
+    private final OwnerRepository ownerRepository;
+
+    public OwnerService(OwnerRepository ownerRepository) {
+        this.ownerRepository = ownerRepository;
+    }
 
     public List<Owner> findAllOwners() {
         List<Owner> superiors = ownerRepository.findAllBySuperior(ownerRepository.findOne(1L));
-        List<Owner> ownerList = ownerRepository.findAll();
-        ownerList.removeAll(superiors);
-        ownerList.remove(ownerRepository.findOne(1L));
+        List<Owner> ownerList = getOwners(superiors);
 
         return superiors.stream()
                 .map(superior -> ownerList.stream()
@@ -29,12 +29,17 @@ public class OwnerService {
                 .collect(Collectors.toList());
     }
 
-    public List<OwnerBySuperior> findAllBySuperior() {
-        List<Owner> superiors = ownerRepository.findAllBySuperior(ownerRepository.findOne(1L));
+    private List<Owner> getOwners(List<Owner> superiors) {
         List<Owner> ownerList = ownerRepository.findAll();
         ownerList.removeAll(superiors);
         ownerList.remove(ownerRepository.findOne(1L));
-        List<OwnerBySuperior> result = superiors.stream()
+        return ownerList;
+    }
+
+    public List<OwnerBySuperior> findAllBySuperior() {
+        List<Owner> superiors = ownerRepository.findAllBySuperior(ownerRepository.findOne(1L));
+        List<Owner> ownerList = getOwners(superiors);
+        return superiors.stream()
                 .map(s -> new OwnerBySuperior(
                                 s,
                                 ownerList.stream()
@@ -43,6 +48,5 @@ public class OwnerService {
                         )
                 )
                 .collect(Collectors.toList());
-        return result;
     }
 }
