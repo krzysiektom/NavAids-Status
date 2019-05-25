@@ -91,16 +91,4 @@ public class Failure {
         this.finished = finished;
     }
 
-    @Override
-    public String toString() {
-        return "Failure{" +
-                "id=" + id +
-                ", device=" + device +
-                ", user=" + user +
-                ", description='" + description + '\'' +
-                ", isFixed=" + isFixed +
-                ", created=" + created +
-                ", finished=" + finished +
-                '}';
-    }
 }

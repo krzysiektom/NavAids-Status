@@ -16,8 +16,12 @@
 
 <div class="container">
 
-    <header>Device</header>
-
+    <header>
+        Device
+        <c:if test="${!device.ready}">
+            <a href="/failures/device/${device.id}" class="btn btn-success btn-sm float-right">Failure details</a>
+        </c:if>
+    </header>
 
     <div class="card mt-4">
         <div class="card-body">

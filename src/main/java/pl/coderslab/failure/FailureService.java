@@ -1,6 +1,5 @@
 package pl.coderslab.failure;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import pl.coderslab.AuthHandler;
@@ -12,14 +11,17 @@ import pl.coderslab.fix.FixRepository;
 @Service
 @Transactional
 public class FailureService {
-    @Autowired
-    DeviceRepository deviceRepository;
-    @Autowired
-    AuthHandler authHandler;
-    @Autowired
-    FailureRepository failureRepository;
-    @Autowired
-    FixRepository fixRepository;
+    private final DeviceRepository deviceRepository;
+    private final AuthHandler authHandler;
+    private final FailureRepository failureRepository;
+    private final FixRepository fixRepository;
+
+    public FailureService(DeviceRepository deviceRepository, AuthHandler authHandler, FailureRepository failureRepository, FixRepository fixRepository) {
+        this.deviceRepository = deviceRepository;
+        this.authHandler = authHandler;
+        this.failureRepository = failureRepository;
+        this.fixRepository = fixRepository;
+    }
 
     public Long save(FailureAndFix failureAndFix, Long deviceId) {
         Device device = deviceRepository.findOne(deviceId);
@@ -34,7 +36,7 @@ public class FailureService {
         fix.setUser(authHandler.getUser());
         fix.setFailure(failure);
         fix.setDone(failureAndFix.getDone());
-        fix.setUsedMaterials(failureAndFix.getDescription());
+        fix.setUsedMaterials(failureAndFix.getUsedMaterials());
         fixRepository.save(fix);
         return failure.getId();
     }

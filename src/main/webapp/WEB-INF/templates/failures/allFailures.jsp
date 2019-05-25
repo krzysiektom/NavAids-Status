@@ -15,7 +15,7 @@
 
 <div class="container">
 
-    <header>Fix page"</header>
+    <header>Failure page</header>
 
 
     <div class="card mt-4">

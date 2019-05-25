@@ -63,9 +63,9 @@
     <div class="card mt-4">
         <div class="card-body">
 
-            <table class="table table-hover"><b>Fixes details:</b> <a href="/fixes/add/${failure.id}" class="btn btn-success btn-sm float-right">New fix</a>
+            <table class="table table-hover"><b>Fixes details:</b>
+                <a href="/fixes/add/${failure.id}" class="btn btn-success btn-sm float-right">Add new fix</a>
                 <tr>
-
                     <th>Done</th>
                     <th>Created</th>
                     <th>Action</th>
