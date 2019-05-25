@@ -32,7 +32,7 @@
                     <tr>
                         <td>${group.name}</td>
                         <td>${group.abbr}</td>
-                        <td><a href="/types/${group.id}" class="btn btn-success btn-sm">Types</a></td>
+                        <td><a href="/types/all/${group.id}" class="btn btn-success btn-sm">Types</a></td>
                     </tr>
                 </c:forEach>
             </table>

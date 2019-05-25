@@ -8,43 +8,33 @@
     <script src="<c:url value="/webjars/bootstrap/4.3.1/js/bootstrap.min.js"/>"></script>
     <link href="<c:url value="/webjars/bootstrap/4.3.1/css/bootstrap.min.css"/>" rel="stylesheet">
     <link href="<c:url value="/resources/css/main.css"/>" rel="stylesheet">
-    <title>allDevices</title>
+    <title>allFailures</title>
 </head>
 <body>
 <%@include file="../fragments/header.jspf" %>
 
 <div class="container">
 
-    <header>All devices</header>
+    <header>Type page</header>
 
 
-    <div class="card mt-3">
+    <div class="card mt-4">
         <div class="card-body">
 
-            <table class="table table-hover">
+            <table class="table table-hover"><b>All types:</b>
                 <tr>
-                    <th>Airfield</th>
-                    <th>Type</th>
-                    <th>Status</th>
-                    <th>Actions</th>
+                    <th>Name</th>
+                    <th>Abbr group</th>
                 </tr>
-                <c:forEach items="${allDevices}" var="device">
+                <c:forEach items="${types}" var="type">
                     <tr>
-                        <td>${device.airfield.abbr}</td>
-                        <td>${device.type.name}</td>
-                        <td>${device.ready}</td>
-                        <td><a href="/devices/${device.id}" class="btn btn-success btn-sm">Details</a>
-                            <c:if test="${device.ready}">
-                                <a href="/failures/add/${device.id}" class="btn btn-success btn-sm">Add failure</a>
-                            </c:if>
-                        </td>
+                        <td>${type.name}</td>
+                        <td>${type.group.abbr}</td>
                     </tr>
                 </c:forEach>
             </table>
         </div>
     </div>
 </div>
-
-
 </body>
 </html>

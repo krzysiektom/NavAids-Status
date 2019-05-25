@@ -73,6 +73,7 @@
                     </a>
                     <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
                         <a class="dropdown-item" href="/groups/all">All groups</a>
+                        <a class="dropdown-item" href="/types/all">All types</a>
                     </div>
                 </li>
 
@@ -85,11 +86,11 @@
                         Admin
                     </a>
                     <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                        <a class="dropdown-item" href="/users/login">Add owner</a>
-                        <a class="dropdown-item" href="/users/login">Add airfield</a>
+                        <a class="dropdown-item" href="/owners/add">Add owner</a>
+                        <a class="dropdown-item" href="/airfields/add">Add airfield</a>
                         <a class="dropdown-item" href="/groups/add">Add group</a>
-                        <a class="dropdown-item" href="/users/add">Add type</a>
-                        <a class="dropdown-item" href="/users/add">Add device</a>
+                        <a class="dropdown-item" href="/types/add">Add type</a>
+                        <a class="dropdown-item" href="/devices/add">Add device</a>
                     </div>
                 </li>
                 <li class="nav-item dropdown float-right">
