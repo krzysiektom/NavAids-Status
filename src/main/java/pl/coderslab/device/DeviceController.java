@@ -1,49 +1,66 @@
 package pl.coderslab.device;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.*;
 import pl.coderslab.airfield.Airfield;
 import pl.coderslab.airfield.AirfieldRepository;
 import pl.coderslab.group.Group;
 import pl.coderslab.group.GroupRepository;
 import pl.coderslab.owner.Owner;
 import pl.coderslab.owner.OwnerRepository;
-import pl.coderslab.owner.OwnerService;
 import pl.coderslab.type.Type;
 import pl.coderslab.type.TypeRepository;
 
+import javax.validation.Valid;
 import java.util.List;
 
 @Controller
 @RequestMapping("devices")
 public class DeviceController {
     private final DeviceService deviceService;
+    private final TypeRepository typeRepository;
+    private final OwnerRepository ownerRepository;
+    private final AirfieldRepository airfieldRepository;
+    private final GroupRepository groupRepository;
+    private final DeviceRepository deviceRepository;
 
-    @Autowired
-    private TypeRepository typeRepository;
-    @Autowired
-    private OwnerService ownerService;
-    @Autowired
-    private OwnerRepository ownerRepository;
-    @Autowired
-    private AirfieldRepository airfieldRepository;
-    @Autowired
-    private GroupRepository groupRepository;
-    @Autowired
-    private DeviceRepository deviceRepository;
-
-    public DeviceController(DeviceService deviceService) {
+    public DeviceController(DeviceService deviceService, TypeRepository typeRepository, OwnerRepository ownerRepository, AirfieldRepository airfieldRepository, GroupRepository groupRepository, DeviceRepository deviceRepository) {
         this.deviceService = deviceService;
+        this.typeRepository = typeRepository;
+        this.ownerRepository = ownerRepository;
+        this.airfieldRepository = airfieldRepository;
+        this.groupRepository = groupRepository;
+        this.deviceRepository = deviceRepository;
     }
 
     @GetMapping("/")
     public String allDevices(Model model) {
         model.addAttribute("allDevices", deviceRepository.findAll());
         return "devices/allDevices";
+    }
+
+    @GetMapping("/add")
+    public String showForm(Model model) {
+        model.addAttribute("device", new Device());
+        model.addAttribute("owners", ownerRepository.findAll());
+        model.addAttribute("types", typeRepository.findAll());
+        model.addAttribute("airfields", airfieldRepository.findAll());
+        return "devices/deviceForm";
+    }
+
+    @PostMapping("/add")
+    public String addDevice(@ModelAttribute("device") @Valid Device device, BindingResult result, Model model) {
+        if (result.hasErrors()) {
+            model.addAttribute("owners", ownerRepository.findAll());
+            model.addAttribute("types", typeRepository.findAll());
+            model.addAttribute("airfields", airfieldRepository.findAll());
+            return "devices/deviceForm";
+        }
+        device.setReady(true);
+        deviceRepository.save(device);
+        return "redirect:/devices/" + device.getId();
     }
 
     @GetMapping("/{id}")
@@ -114,8 +131,8 @@ public class DeviceController {
     public String allDevicesCountByTypeGroupByGroup(@PathVariable Long id, Model model) {
         Group group = groupRepository.findOne(id);
         List<DevicesCountByType> devicesCountByTypes = deviceRepository.countByTypes(group);
-        if(devicesCountByTypes.size()==1){
-            return "redirect:/devices/group/"+id;
+        if (devicesCountByTypes.size() == 1) {
+            return "redirect:/devices/group/" + id;
         }
         model.addAttribute("group", group);
         model.addAttribute("devicesCountByTypes", devicesCountByTypes);

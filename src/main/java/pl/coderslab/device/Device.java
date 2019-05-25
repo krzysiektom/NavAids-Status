@@ -78,4 +78,16 @@ public class Device {
     public void setOwner(Owner owner) {
         this.owner = owner;
     }
+
+    @Override
+    public String toString() {
+        return "Device{" +
+                "id=" + id +
+                ", type=" + type +
+                ", factoryNumber='" + factoryNumber + '\'' +
+                ", ready=" + ready +
+                ", airfield=" + airfield +
+                ", owner=" + owner +
+                '}';
+    }
 }

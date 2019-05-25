@@ -8,6 +8,9 @@ public class DevicesCountByType {
     private Long ready;
     private Long underService;
 
+    public DevicesCountByType() {
+    }
+
     public DevicesCountByType(Type type, Long count, Long ready, Long underService) {
         this.type = type;
         this.count = count;
