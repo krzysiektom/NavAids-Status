@@ -28,14 +28,14 @@ public class TypeController {
     public String showForm(Model model) {
         model.addAttribute("type", new Type());
         model.addAttribute("groups", groupRepository.findAll());
-        return "types/typForm";
+        return "types/typeForm";
     }
 
     @PostMapping("/add")
     public String addType(@ModelAttribute("type") @Valid Type type, BindingResult result, Model model) {
         if (result.hasErrors()) {
             model.addAttribute("groups", groupRepository.findAll());
-            return "types/typForm";
+            return "types/typeForm";
         }
         typeRepository.save(type);
         return "redirect:/types/all";

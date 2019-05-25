@@ -37,13 +37,13 @@ public class TypeControllerTest {
 
     @Test
     public void showForm() {
-        assertEquals("types/typForm",tested.showForm(model));
+        assertEquals("types/typeForm",tested.showForm(model));
     }
 
     @Test
     public void addType() {
         Mockito.when(result.hasErrors()).thenReturn(true);
-        assertEquals("types/typForm",tested.addType(type,result,model));
+        assertEquals("types/typeForm",tested.addType(type,result,model));
 
         Mockito.when(result.hasErrors()).thenReturn(false);
         assertEquals("redirect:/types/all",tested.addType(type,result,model));

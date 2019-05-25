@@ -1,5 +1,7 @@
 package pl.coderslab.owner;
 
+import org.hibernate.validator.constraints.NotBlank;
+
 import javax.persistence.*;
 
 @Entity
@@ -9,7 +11,9 @@ public class Owner {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @NotBlank
     private String name;
+    @NotBlank
     private String abbr;
     @ManyToOne
     private Owner superior;
