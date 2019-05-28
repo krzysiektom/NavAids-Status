@@ -32,7 +32,7 @@
                 <div class="row">
                     <div class="form-group col-md-4">
                         <label for="abbrId">Group:</label>
-                        <form:select path="group.id" id="abbrId">
+                        <form:select class="form-control" path="group.id" id="abbrId">
                             <form:option value="-" label="--Please Select--"/>
                             <form:options items="${groups}" itemValue="id" itemLabel="abbr"/>
                         </form:select>
@@ -43,7 +43,7 @@
 
 
 
-                <input type="submit" value="Save"/>
+                <input class="btn btn-success btn-sm" type="submit" value="Save"/>
 
             </div>
         </div>

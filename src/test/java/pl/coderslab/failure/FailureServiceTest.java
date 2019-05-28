@@ -33,29 +33,30 @@ public class FailureServiceTest {
     @Mock
     private User user;
 
-    private Failure failure;
-    private Device device;
-
 
     @Before
     public void setUp() {
-        device = new Device();
-        device.setReady(true);
-        device.setId(1L);
-        failure = new Failure();
-        failureAndFix = new FailureAndFix();
-        failureAndFix.setDescription("desc");
     }
 
     @Test
     public void save() {
-       /* Long deviceId = 1L;
+   /*     Failure failure = new Failure();
+        Failure failureAfterSave = new Failure();
+        failureAfterSave.setId(1L);
+        failureAndFix = new FailureAndFix();
+        failureAndFix.setDescription("desc");
+        Long deviceId = 1L;
+
+        Device device = new Device();
+        device.setReady(true);
+        device.setId(1L);
+
         Mockito.when(deviceRepository.findOne(deviceId)).thenReturn(device);
         Mockito.when(authHandler.getUser()).thenReturn(user);
-        Mockito.when(failureRepository.save(failure)).thenReturn(failure);
+        Mockito.when(failureRepository.save(failure)).thenReturn(failureAfterSave);
 
         assertEquals(null, tested.save(failureAndFix, deviceId));
         assertFalse(device.isReady());
-      //  assertEquals("desc", failure.getDescription());*/
+        assertEquals("desc", failure.getDescription());*/
     }
 }

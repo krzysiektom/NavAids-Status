@@ -37,7 +37,7 @@
                     </div>
                 </div>
 
-                <input type="submit" value="Save"/>
+                <input class="btn btn-success btn-sm" type="submit" value="Save"/>
 
             </div>
         </div>

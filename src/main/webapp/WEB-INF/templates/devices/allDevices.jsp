@@ -35,7 +35,7 @@
                         <td>${device.ready}</td>
                         <td><a href="/devices/${device.id}" class="btn btn-success btn-sm">Details</a>
                             <c:if test="${device.ready}">
-                                <a href="/failures/add/${device.id}" class="btn btn-success btn-sm">Add failure</a>
+                                <a href="/failures/add/${device.id}" class="btn btn-primary btn-sm">Add failure</a>
                             </c:if>
                         </td>
                     </tr>

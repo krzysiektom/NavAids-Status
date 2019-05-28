@@ -41,14 +41,14 @@
                 <div class="row">
                     <div class="form-group col-md-4">
                         <label for="abbrId">Owner:</label>
-                        <form:select path="owner.id" id="abbrId">
+                        <form:select class="form-control" path="owner.id" id="abbrId">
                             <form:option value="-" label="--Please Select--"/>
                             <form:options items="${owners}" itemValue="id" itemLabel="abbr"/>
                         </form:select>
                         <form:errors path="owner" element="div" cssClass="error"/>
                     </div>
                 </div>
-                <input type="submit" value="Save"/>
+                <input class="btn btn-success btn-sm" type="submit" value="Save"/>
 
             </div>
         </div>

@@ -33,7 +33,7 @@
                 <div class="row">
                     <div class="form-group col-md-4">
                         <label for="typeId">Type:</label>
-                        <form:select path="type.id" id="typeId">
+                        <form:select class="form-control" path="type.id" id="typeId">
                             <form:option value="" label="--Please Select--"/>
                             <form:options items="${types}" itemValue="id" itemLabel="name"/>
                         </form:select>
@@ -44,7 +44,7 @@
                 <div class="row">
                     <div class="form-group col-md-4">
                         <label for="airfieldId">Airfield:</label>
-                        <form:select path="airfield.id" id="airfieldId">
+                        <form:select class="form-control" path="airfield.id" id="airfieldId">
                             <form:option value="" label="--Please Select--"/>
                             <form:options items="${airfields}" itemValue="id" itemLabel="abbr"/>
                         </form:select>
@@ -55,7 +55,7 @@
                 <div class="row">
                     <div class="form-group col-md-4">
                         <label for="ownerId">Owner:</label>
-                        <form:select path="owner.id" id="ownerId">
+                        <form:select class="form-control" path="owner.id" id="ownerId">
                             <form:option value="" label="--Please Select--"/>
                             <form:options items="${owners}" itemValue="id" itemLabel="abbr"/>
                         </form:select>
@@ -63,7 +63,7 @@
                     </div>
                 </div>
 
-                <input type="submit" value="Save"/>
+                <input class="btn btn-success btn-sm" type="submit" value="Save"/>
 
             </div>
         </div>

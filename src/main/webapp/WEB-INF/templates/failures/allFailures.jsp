@@ -37,8 +37,8 @@
                         <td>${failure.device.owner.abbr}</td>
                         <td>${failure.device.type.group.abbr}</td>
                         <td>${failure.device.type.name}</td>
-                        <td>${failure.created}</td>
-                        <td><a href="/failures/${failure.id}" class="btn btn-success btn-sm">Details</a></td>
+                        <td>${failure.created.format(format)}</td>
+                        <td><a href="/failures/${failure.id}" class="btn btn-warning btn-sm">Details</a></td>
                     </tr>
                 </c:forEach>
             </table>

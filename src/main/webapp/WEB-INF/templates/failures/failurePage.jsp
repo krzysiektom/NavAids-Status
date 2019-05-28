@@ -54,7 +54,7 @@
                 <tr>
                     <td>${failure.description}</td>
                     <td>${failure.user.firstName} ${failure.user.lastName}</td>
-                    <td>${failure.created}</td>
+                    <td>${failure.created.format(format)}</td>
                 </tr>
             </table>
         </div>
@@ -73,8 +73,8 @@
                 <c:forEach items="${allFixes}" var="fix">
                     <tr>
                         <td>${fix.done}</td>
-                        <td>${fix.created}</td>
-                        <td><a href="#details${fix.id}" class="btn btn-success btn-sm"
+                        <td>${fix.created.format(format)}</td>
+                        <td><a href="#details${fix.id}" class="btn btn-warning btn-sm"
                                data-toggle="collapse">Details</a></td>
                     </tr>
                     <tr>

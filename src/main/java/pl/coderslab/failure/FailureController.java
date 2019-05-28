@@ -9,6 +9,7 @@ import pl.coderslab.device.DeviceRepository;
 import pl.coderslab.fix.FixRepository;
 
 import javax.validation.Valid;
+import java.time.format.DateTimeFormatter;
 
 @Controller
 @RequestMapping("failures")
@@ -24,6 +25,7 @@ public class FailureController {
 
     @GetMapping("/")
     public String allFailures(Model model) {
+        model.addAttribute("format", DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));
         model.addAttribute("allFailures", failureRepository.findAllByIsFixedIsFalse());
         return "failures/allFailures";
     }
@@ -33,6 +35,7 @@ public class FailureController {
         Failure failure = failureRepository.findOne(id);
         model.addAttribute("failure", failure);
         model.addAttribute("allFixes", fixRepository.findAllByFailureOrderByCreatedDesc(failure));
+        model.addAttribute("format", DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));
         return "failures/failurePage";
     }
 
@@ -57,6 +60,6 @@ public class FailureController {
         Failure failure = failureRepository.findByDeviceAndIsFixedIsFalse(deviceRepository.findOne(deviceId));
         model.addAttribute("failure", failure);
         model.addAttribute("allFixes", fixRepository.findAllByFailureOrderByCreatedDesc(failure));
-        return "failures/failurePage";
+        return "redirect:/failures/"+failure.getId();
     }
 }
