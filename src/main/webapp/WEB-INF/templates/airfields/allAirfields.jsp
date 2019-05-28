@@ -26,12 +26,15 @@
                     <th>Name</th>
                     <th>Abbr name</th>
                     <th>Abbr superior name</th>
+                    <th>Action</th>
                 </tr>
                 <c:forEach items="${airfields}" var="airfield">
                     <tr>
                         <td>${airfield.name}</td>
                         <td>${airfield.abbr}</td>
                         <td>${airfield.owner.abbr}</td>
+                        <td><a href="/devices/airfield/${airfield.id}" class="btn btn-success btn-sm">All devices</a></td>
+
                     </tr>
                 </c:forEach>
             </table>

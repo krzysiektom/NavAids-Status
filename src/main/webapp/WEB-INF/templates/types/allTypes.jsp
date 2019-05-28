@@ -25,11 +25,14 @@
                 <tr>
                     <th>Name</th>
                     <th>Abbr group</th>
+                    <th>Action</th>
                 </tr>
                 <c:forEach items="${types}" var="type">
                     <tr>
                         <td>${type.name}</td>
                         <td>${type.group.abbr}</td>
+                        <td><a href="/devices/type/${type.id}" class="btn btn-success btn-sm">All devices</a></td>
+
                     </tr>
                 </c:forEach>
             </table>
