@@ -17,7 +17,7 @@
 <form:form method="post" modelAttribute="owner">
 
     <div class="container">
-        <header>Add type</header>
+        <header>Add owner</header>
 
         <div class="card mt-4">
             <div class="card-body">

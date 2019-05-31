@@ -17,7 +17,7 @@
 <form:form method="post" modelAttribute="airfield">
 
     <div class="container">
-        <header>Add type</header>
+        <header>Add airfield</header>
 
         <div class="card mt-4">
             <div class="card-body">

@@ -17,7 +17,7 @@
 <form:form method="post" modelAttribute="failureAndFix">
 
     <div class="container">
-        <header>Add fix</header>
+        <header>Add failure</header>
 
         <div class="card mt-4">
             <div class="card-body">
