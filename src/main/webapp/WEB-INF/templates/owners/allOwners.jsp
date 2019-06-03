@@ -21,7 +21,9 @@
     <div class="card mt-4">
         <div class="card-body">
 
-            <table class="table table-hover"><b>All owners:</b>
+            <table class="table table-hover">
+                <b>All owners:</b>
+                <a href="/owners/add" class="btn btn-primary btn-sm float-right">Add owner</a>
                 <tr>
                     <th>Name</th>
                     <th>Abbr name</th>
@@ -33,7 +35,11 @@
                         <td>${owner.name}</td>
                         <td>${owner.abbr}</td>
                         <td>${owner.superior.abbr}</td>
-                        <td><a href="/devices/owner/${owner.id}" class="btn btn-success btn-sm">All devices</a></td>
+                        <td>
+                            <a href="/devices/owner/${owner.id}" class="btn btn-success btn-sm">All devices</a>
+                            <a href="/owners/edit/${owner.id}" class="btn btn-primary btn-sm">Edit</a>
+                            <a href="/owners/delete/${owner.id}" class="btn btn-warning btn-sm">Delete</a>
+                        </td>
 
                     </tr>
                 </c:forEach>

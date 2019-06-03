@@ -24,6 +24,14 @@ public class TypeController {
         return "types/allTypes";
     }
 
+    @GetMapping("/all/{groupId}")
+    public String typesInGroup(@PathVariable("groupId") Long groupId, Model model) {
+        Group group = groupRepository.findOne(groupId);
+        model.addAttribute("group", group);
+        model.addAttribute("types", typeRepository.findAllByGroup(group));
+        return "types/typesByGroup";
+    }
+
     @GetMapping("/add")
     public String showForm(Model model) {
         model.addAttribute("type", new Type());
@@ -41,12 +49,27 @@ public class TypeController {
         return "redirect:/types/all";
     }
 
-    @GetMapping("/all/{groupId}")
-    public String typesInGroup(@PathVariable("groupId") Long groupId, Model model) {
-        Group group = groupRepository.findOne(groupId);
-        model.addAttribute("group", group);
-        model.addAttribute("types", typeRepository.findAllByGroup(group));
-        return "types/typesByGroup";
+    @GetMapping("/edit/{id}")
+    public String editForm(@PathVariable Long id, Model model) {
+        model.addAttribute("type", typeRepository.findOne(id));
+        model.addAttribute("groups", groupRepository.findAll());
+        return "types/typeForm";
+    }
+
+    @PostMapping("/edit/{id}")
+    public String editType(@ModelAttribute("type") @Valid Type type, BindingResult result, Model model) {
+        if (result.hasErrors()) {
+            model.addAttribute("groups", groupRepository.findAll());
+            return "types/typeForm";
+        }
+        typeRepository.save(type);
+        return "redirect:/types/all";
+    }
+
+    @GetMapping("/delete/{id}")
+    public String delete(@PathVariable Long id) {
+        typeRepository.delete(id);
+        return "redirect:/types/all";
     }
 
 }

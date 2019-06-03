@@ -21,7 +21,9 @@
     <div class="card mt-4">
         <div class="card-body">
 
-            <table class="table table-hover"><b>All types:</b>
+            <table class="table table-hover">
+                <b>All types:</b>
+                <a href="/types/add" class="btn btn-primary btn-sm float-right">Add type</a>
                 <tr>
                     <th>Name</th>
                     <th>Abbr group</th>
@@ -31,8 +33,11 @@
                     <tr>
                         <td>${type.name}</td>
                         <td>${type.group.abbr}</td>
-                        <td><a href="/devices/type/${type.id}" class="btn btn-success btn-sm">All devices</a></td>
-
+                        <td>
+                            <a href="/devices/type/${type.id}" class="btn btn-success btn-sm">All devices</a>
+                            <a href="/types/edit/${type.id}" class="btn btn-primary btn-sm">Edit</a>
+                            <a href="/types/delete/${type.id}" class="btn btn-warning btn-sm">Delete</a>
+                        </td>
                     </tr>
                 </c:forEach>
             </table>

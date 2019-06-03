@@ -21,7 +21,7 @@
     <div class="card mt-4">
         <div class="card-body">
 
-            <table class="table table-hover"><b>All airfields:</b>
+            <table class="table table-hover"><b>All airfields:</b><a href="/airfields/add" class="btn btn-primary btn-sm float-right">Add airfield</a>
                 <tr>
                     <th>Name</th>
                     <th>Abbr name</th>
@@ -33,7 +33,11 @@
                         <td>${airfield.name}</td>
                         <td>${airfield.abbr}</td>
                         <td>${airfield.owner.abbr}</td>
-                        <td><a href="/devices/airfield/${airfield.id}" class="btn btn-success btn-sm">All devices</a></td>
+                        <td>
+                            <a href="/devices/airfield/${airfield.id}" class="btn btn-success btn-sm">All devices</a>
+                            <a href="/airfields/edit/${airfield.id}" class="btn btn-primary btn-sm">Edit</a>
+                            <a href="/airfields/delete/${airfield.id}" class="btn btn-warning btn-sm">Delete</a>
+                        </td>
 
                     </tr>
                 </c:forEach>

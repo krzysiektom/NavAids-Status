@@ -21,7 +21,9 @@
     <div class="card mt-4">
         <div class="card-body">
 
-            <table class="table table-hover"><b>All groups:</b>
+            <table class="table table-hover">
+                <b>All groups:</b>
+                <a href="/groups/add" class="btn btn-primary btn-sm float-right">Add group</a>
                 <tr>
 
                     <th>Name</th>
@@ -32,7 +34,11 @@
                     <tr>
                         <td>${group.name}</td>
                         <td>${group.abbr}</td>
-                        <td><a href="/types/all/${group.id}" class="btn btn-success btn-sm">Types</a></td>
+                        <td>
+                            <a href="/types/all/${group.id}" class="btn btn-success btn-sm">Types</a>
+                            <a href="/groups/edit/${group.id}" class="btn btn-primary btn-sm">Edit</a>
+                            <a href="/groups/delete/${group.id}" class="btn btn-warning btn-sm">Delete</a>
+                        </td>
                     </tr>
                 </c:forEach>
             </table>

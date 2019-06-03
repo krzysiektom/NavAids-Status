@@ -17,7 +17,12 @@
 <form:form method="post" modelAttribute="group">
 
     <div class="container">
-        <header>Add group</header>
+        <c:if test="${group.id==null}">
+            <header>Add group</header>
+        </c:if>
+        <c:if test="${group.id!=null}">
+            <header>Edit group</header>
+        </c:if>
 
         <div class="card mt-4">
             <div class="card-body">

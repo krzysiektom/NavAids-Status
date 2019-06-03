@@ -17,8 +17,12 @@
 <form:form method="post" modelAttribute="owner">
 
     <div class="container">
-        <header>Add owner</header>
-
+        <c:if test="${owner.id==null}">
+            <header>Add owner</header>
+        </c:if>
+        <c:if test="${owner.id!=null}">
+            <header>Edit owner</header>
+        </c:if>
         <div class="card mt-4">
             <div class="card-body">
 
@@ -42,7 +46,9 @@
                     <div class="form-group col-md-4">
                         <label for="abbrId">Superior:</label>
                         <form:select class="form-control" path="superior.id" id="abbrId">
-                            <form:option value="-" label="--Please Select--"/>
+                            <c:if test="${owner.id==null}">
+                                <form:option value="-" label="--Please Select--"/>
+                            </c:if>
                             <form:options items="${superiors}" itemValue="id" itemLabel="abbr"/>
                         </form:select>
                         <form:errors path="superior" element="div" cssClass="error"/>

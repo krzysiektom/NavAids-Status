@@ -73,6 +73,6 @@ public class FailureControllerTest {
     public void failureByDeviceId(){
         Mockito.when(deviceRepository.findOne(deviceId)).thenReturn(device);
         Mockito.when(failureRepository.findByDeviceAndIsFixedIsFalse(device)).thenReturn(failure);
-        assertEquals("failures/failurePage",tested.failureByDeviceId(deviceId,model));
+        assertEquals("redirect:/failures/0",tested.failureByDeviceId(deviceId,model));
     }
 }

@@ -4,10 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 import pl.coderslab.owner.OwnerRepository;
 
 import javax.validation.Valid;
@@ -40,6 +37,29 @@ public class AirfieldController {
             return "airfields/airfieldForm";
         }
         airfieldRepository.save(airfield);
+        return "redirect:/airfields/all";
+    }
+
+    @GetMapping("/edit/{id}")
+    public String showForm(@PathVariable Long id, Model model) {
+        model.addAttribute("owners", ownerRepository.findAll());
+        model.addAttribute("airfield", airfieldRepository.findOne(id));
+        return "airfields/airfieldForm";
+    }
+
+    @PostMapping("/edit/{id}")
+    public String editAirfield(@ModelAttribute("airfield") @Valid Airfield airfield, BindingResult result, Model model) {
+        if (result.hasErrors()) {
+            model.addAttribute("owners", ownerRepository.findAll());
+            return "airfields/airfieldForm";
+        }
+        airfieldRepository.save(airfield);
+        return "redirect:/airfields/all";
+    }
+
+    @GetMapping("/delete/{id}")
+    public String deleteAirfield(@PathVariable Long id) {
+        airfieldRepository.delete(id);
         return "redirect:/airfields/all";
     }
 

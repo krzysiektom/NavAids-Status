@@ -17,8 +17,12 @@
 <form:form method="post" modelAttribute="airfield">
 
     <div class="container">
-        <header>Add airfield</header>
-
+        <c:if test="${airfield.id==null}">
+            <header>Add airfield</header>
+        </c:if>
+        <c:if test="${airfield.id!=null}">
+            <header>Edit airfield</header>
+        </c:if>
         <div class="card mt-4">
             <div class="card-body">
 
@@ -42,7 +46,9 @@
                     <div class="form-group col-md-4">
                         <label for="abbrId">Owner:</label>
                         <form:select class="form-control" path="owner.id" id="abbrId">
-                            <form:option value="-" label="--Please Select--"/>
+                            <c:if test="${airfield.id==null}">
+                                <form:option value="-" label="--Please Select--"/>
+                            </c:if>
                             <form:options items="${owners}" itemValue="id" itemLabel="abbr"/>
                         </form:select>
                         <form:errors path="owner" element="div" cssClass="error"/>
