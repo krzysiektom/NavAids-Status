@@ -72,10 +72,10 @@
                         All
                     </a>
                     <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                        <a class="dropdown-item" href="/owners/all">All owners</a>
-                        <a class="dropdown-item" href="/airfields/all">All airfields</a>
-                        <a class="dropdown-item" href="/groups/all">All groups</a>
-                        <a class="dropdown-item" href="/types/all">All types</a>
+                        <a class="dropdown-item" href="/owners/all">Owners</a>
+                        <a class="dropdown-item" href="/airfields/all">Airfields</a>
+                        <a class="dropdown-item" href="/groups/all">Groups</a>
+                        <a class="dropdown-item" href="/types/all">Types</a>
                     </div>
                 </li>
 

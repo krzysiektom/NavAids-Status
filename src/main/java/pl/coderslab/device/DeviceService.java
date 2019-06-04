@@ -52,10 +52,10 @@ public class DeviceService {
 
         return owners.stream()
                 .map(owner -> new DevicesByOwner(
-                                owner,
-                                devices.stream().filter(device -> device.getOwner().equals(owner)).collect(Collectors.toList())
-                        )
-                )
+                        owner,
+                        devices.stream()
+                                .filter(device -> device.getOwner().equals(owner))
+                                .collect(Collectors.toList())))
                 .collect(Collectors.toList());
     }
 
@@ -65,10 +65,10 @@ public class DeviceService {
 
         return airfields.stream()
                 .map(airfield -> new DevicesByAirfield(
-                                airfield,
-                                devices.stream().filter(device -> device.getAirfield().equals(airfield)).collect(Collectors.toList())
-                        )
-                )
+                        airfield,
+                        devices.stream()
+                                .filter(device -> device.getAirfield().equals(airfield))
+                                .collect(Collectors.toList())))
                 .collect(Collectors.toList());
     }
 
@@ -87,9 +87,7 @@ public class DeviceService {
                                                 .filter(devicesCountByType -> devicesCountByType.getType().equals(type))
                                                 .collect(Collectors.toList()))
                                         .flatMap(Collection::stream)
-                                        .collect(Collectors.toList())
-                        )
-                )
+                                        .collect(Collectors.toList())))
                 .collect(Collectors.toList());
     }
 
@@ -99,12 +97,10 @@ public class DeviceService {
 
         return types.stream()
                 .map(type -> new DevicesByType(
-                                type,
-                                devices.stream()
-                                        .filter(device -> device.getType().equals(type))
-                                        .collect(Collectors.toList())
-                        )
-                )
+                        type,
+                        devices.stream()
+                                .filter(device -> device.getType().equals(type))
+                                .collect(Collectors.toList())))
                 .collect(Collectors.toList());
     }
 
@@ -126,32 +122,30 @@ public class DeviceService {
         List<DevicesCountByAirfieldAndGroup> dCs = deviceRepository.countByAirfieldAndGroup();
 
         return groups.stream()
-                .map(group -> new DevicesCountByGroup(group,
-                                dCs.stream()
-                                        .filter(dC -> dC.getGroup().equals(group))
-                                        .reduce(0L, (partialResult, dc) -> partialResult + dc.getCount(), Long::sum),
-                                dCs.stream()
-                                        .filter(dC -> dC.getGroup().equals(group))
-                                        .reduce(0L, (partialResult, dc) -> partialResult + dc.getReady(), Long::sum),
-                                dCs.stream()
-                                        .filter(dC -> dC.getGroup().equals(group))
-                                        .reduce(0L, (partialResult, dc) -> partialResult + dc.getUnderService(), Long::sum)
-                        )
-                )
+                .map(group -> {
+                    DevicesCountByGroup devicesCountByGroup = new DevicesCountByGroup(group);
+                    dCs.stream()
+                            .filter(dC -> dC.getGroup().equals(group))
+                            .forEach(dc -> {
+                                devicesCountByGroup.addCount(dc.getCount());
+                                devicesCountByGroup.addReady(dc.getReady());
+                                devicesCountByGroup.addUnderService(dc.getUnderService());
+                            });
+                    return devicesCountByGroup;
+                })
                 .collect(Collectors.toList());
     }
 
     public DevicesCountByGroup countByGroup(Group group) {
         List<DevicesCountByType> dCs = deviceRepository.countByTypes(group);
 
-        return new DevicesCountByGroup(group,
-                dCs.stream()
-                        .reduce(0L, (partialResult, dc) -> partialResult + dc.getCount(), Long::sum),
-                dCs.stream()
-                        .reduce(0L, (partialResult, dc) -> partialResult + dc.getReady(), Long::sum),
-                dCs.stream()
-                        .reduce(0L, (partialResult, dc) -> partialResult + dc.getUnderService(), Long::sum)
-        );
+        DevicesCountByGroup devicesCountByGroup = new DevicesCountByGroup(group);
+        dCs.forEach(dc -> {
+            devicesCountByGroup.addCount(dc.getCount());
+            devicesCountByGroup.addReady(dc.getReady());
+            devicesCountByGroup.addUnderService(dc.getUnderService());
+        });
+        return devicesCountByGroup;
     }
 
 }
