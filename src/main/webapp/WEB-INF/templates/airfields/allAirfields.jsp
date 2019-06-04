@@ -26,7 +26,7 @@
                     <th>Name</th>
                     <th>Abbr name</th>
                     <th>Abbr superior name</th>
-                    <th>Action</th>
+                    <th style="width: 20%">Action</th>
                 </tr>
                 <c:forEach items="${airfields}" var="airfield">
                     <tr>
@@ -34,7 +34,7 @@
                         <td>${airfield.abbr}</td>
                         <td>${airfield.owner.abbr}</td>
                         <td>
-                            <a href="/devices/airfield/${airfield.id}" class="btn btn-success btn-sm">All devices</a>
+                            <a href="/devices/airfield/${airfield.id}" class="btn btn-success btn-sm">Devices</a>
                             <a href="/airfields/edit/${airfield.id}" class="btn btn-primary btn-sm">Edit</a>
                             <a href="/airfields/delete/${airfield.id}" class="btn btn-warning btn-sm">Delete</a>
                         </td>

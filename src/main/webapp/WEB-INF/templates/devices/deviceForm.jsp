@@ -62,6 +62,7 @@
                         <form:errors path="owner" element="div" cssClass="error"/>
                     </div>
                 </div>
+                <form:input path="ready" type="hidden"/>
 
                 <input class="btn btn-success btn-sm" type="submit" value="Save"/>
 

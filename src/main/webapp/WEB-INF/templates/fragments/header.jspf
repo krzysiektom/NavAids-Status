@@ -76,6 +76,7 @@
                         <a class="dropdown-item" href="/airfields/all">Airfields</a>
                         <a class="dropdown-item" href="/groups/all">Groups</a>
                         <a class="dropdown-item" href="/types/all">Types</a>
+                        <a class="dropdown-item" href="/devices/all">Devices</a>
                     </div>
                 </li>
 

@@ -28,7 +28,7 @@
                     <th>Name</th>
                     <th>Abbr name</th>
                     <th>Abbr superior name</th>
-                    <th>Action</th>
+                    <th style="width: 20%">Action</th>
                 </tr>
                 <c:forEach items="${owners}" var="owner">
                     <tr>
@@ -36,7 +36,7 @@
                         <td>${owner.abbr}</td>
                         <td>${owner.superior.abbr}</td>
                         <td>
-                            <a href="/devices/owner/${owner.id}" class="btn btn-success btn-sm">All devices</a>
+                            <a href="/devices/owner/${owner.id}" class="btn btn-success btn-sm">Devices</a>
                             <a href="/owners/edit/${owner.id}" class="btn btn-primary btn-sm">Edit</a>
                             <a href="/owners/delete/${owner.id}" class="btn btn-warning btn-sm">Delete</a>
                         </td>

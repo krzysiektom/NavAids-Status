@@ -26,7 +26,7 @@
                     <th>Airfield</th>
                     <th>Type</th>
                     <th>Status</th>
-                    <th>Actions</th>
+                    <th style="width: 20%">Actions</th>
                 </tr>
                 <c:forEach items="${allDevices}" var="device">
                     <tr>

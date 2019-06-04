@@ -68,7 +68,7 @@
                 <tr>
                     <th>Done</th>
                     <th>Created</th>
-                    <th>Action</th>
+                    <th style="width: 15%">Action</th>
                 </tr>
                 <c:forEach items="${allFixes}" var="fix">
                     <tr>

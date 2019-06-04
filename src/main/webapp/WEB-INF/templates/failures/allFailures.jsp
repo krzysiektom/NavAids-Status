@@ -29,7 +29,7 @@
                     <th>Group</th>
                     <th>Type</th>
                     <th>Created</th>
-                    <th>Action</th>
+                    <th style="width: 15%">Action</th>
                 </tr>
                 <c:forEach items="${allFailures}" var="failure">
                     <tr>

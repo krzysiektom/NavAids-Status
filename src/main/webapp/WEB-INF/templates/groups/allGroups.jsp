@@ -28,7 +28,7 @@
 
                     <th>Name</th>
                     <th>Abbr</th>
-                    <th>Action</th>
+                    <th style="width: 20%">Action</th>
                 </tr>
                 <c:forEach items="${groups}" var="group">
                     <tr>

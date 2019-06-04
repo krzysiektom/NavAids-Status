@@ -8,41 +8,45 @@
     <script src="<c:url value="/webjars/bootstrap/4.3.1/js/bootstrap.min.js"/>"></script>
     <link href="<c:url value="/webjars/bootstrap/4.3.1/css/bootstrap.min.css"/>" rel="stylesheet">
     <link href="<c:url value="/resources/css/main.css"/>" rel="stylesheet">
-    <title>allFailures</title>
+    <title>allDevices</title>
 </head>
 <body>
 <%@include file="../fragments/header.jspf" %>
 
 <div class="container">
 
-    <header>Type page</header>
+    <header>All devices</header>
 
 
-    <div class="card mt-4">
+    <div class="card mt-3">
         <div class="card-body">
 
             <table class="table table-hover">
-                <b>All types:</b>
-                <a href="/types/add" class="btn btn-primary btn-sm float-right">Add type</a>
+                <a href="/devices/add" class="btn btn-primary btn-sm float-right">Add device</a>
+
                 <tr>
-                    <th>Name</th>
-                    <th>Abbr group</th>
-                    <th style="width: 20%">Action</th>
+                    <th>Type</th>
+                    <th>Owner</th>
+                    <th>Airfield</th>
+                    <th>Factory number</th>
+                    <th style="width: 20%">Actions</th>
                 </tr>
-                <c:forEach items="${types}" var="type">
+                <c:forEach items="${allDevices}" var="device">
                     <tr>
-                        <td>${type.name}</td>
-                        <td>${type.group.abbr}</td>
+                        <td>${device.type.name}</td>
+                        <td>${device.owner.abbr}</td>
+                        <td>${device.airfield.abbr}</td>
+                        <td>${device.factoryNumber}</td>
                         <td>
-                            <a href="/devices/type/${type.id}" class="btn btn-success btn-sm">Devices</a>
-                            <a href="/types/edit/${type.id}" class="btn btn-primary btn-sm">Edit</a>
-                            <a href="/types/delete/${type.id}" class="btn btn-warning btn-sm">Delete</a>
-                        </td>
+                            <a href="/devices/edit/${device.id}" class="btn btn-primary btn-sm">Edit</a>
+                            <a href="/devices/delete/${device.id}" class="btn btn-warning btn-sm">Delete</a></td>
                     </tr>
                 </c:forEach>
             </table>
         </div>
     </div>
 </div>
+
+
 </body>
 </html>

@@ -18,6 +18,8 @@
 
     <header>
         Device
+        <a href="/devices/edit/${device.id}" class="btn btn-primary btn-sm float-right">Edit</a>
+
         <c:if test="${!device.ready}">
             <a href="/failures/device/${device.id}" class="btn btn-warning btn-sm float-right">Failure details</a>
         </c:if>

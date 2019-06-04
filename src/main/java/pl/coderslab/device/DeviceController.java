@@ -63,6 +63,40 @@ public class DeviceController {
         return "redirect:/devices/" + device.getId();
     }
 
+    @GetMapping("/all")
+    public String allDevicesEdit(Model model) {
+        model.addAttribute("allDevices", deviceRepository.findAll());
+        return "devices/allDevicesEdit";
+    }
+
+    @GetMapping("/edit/{id}")
+    public String editForm(@PathVariable Long id, Model model) {
+        model.addAttribute("device", deviceRepository.findOne(id));
+        model.addAttribute("owners", ownerRepository.findAll());
+        model.addAttribute("types", typeRepository.findAll());
+        model.addAttribute("airfields", airfieldRepository.findAll());
+        return "devices/deviceForm";
+    }
+
+    @PostMapping("/edit/{id}")
+    public String editDevice(@PathVariable Long id, @ModelAttribute("device") @Valid Device device, BindingResult result, Model model) {
+        if (result.hasErrors()) {
+            model.addAttribute("owners", ownerRepository.findAll());
+            model.addAttribute("types", typeRepository.findAll());
+            model.addAttribute("airfields", airfieldRepository.findAll());
+            return "devices/deviceForm";
+        }
+        deviceRepository.save(device);
+        return "redirect:/devices/" + device.getId();
+    }
+
+    @GetMapping("/delete/{id}")
+    public String delete(@PathVariable Long id) {
+        deviceRepository.delete(id);
+        return "redirect:/devices/all";
+    }
+
+
     @GetMapping("/{id}")
     public String deviceDetails(@PathVariable("id") Long id, Model model) {
         model.addAttribute("device", deviceRepository.findOne(id));
