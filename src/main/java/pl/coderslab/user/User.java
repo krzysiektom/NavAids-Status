@@ -5,6 +5,7 @@ import org.hibernate.validator.constraints.NotBlank;
 import org.mindrot.jbcrypt.BCrypt;
 
 import javax.persistence.*;
+import javax.validation.groups.Default;
 
 @Entity
 @Table(name = "users")
@@ -14,17 +15,17 @@ public class User {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @NotBlank
+    @NotBlank(groups = {Default.class, ValidationEditUser.class})
     private String firstName;
 
-    @NotBlank
+    @NotBlank(groups = {Default.class, ValidationEditUser.class})
     private String lastName;
 
     @NotBlank
     private String password;
 
-    @Email
-    @NotBlank
+    @Email(groups = {Default.class, ValidationEditUser.class})
+    @NotBlank(groups = {Default.class, ValidationEditUser.class})
     private String email;
 
     public User() {

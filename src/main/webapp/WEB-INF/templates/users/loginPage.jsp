@@ -17,7 +17,9 @@
 <form:form method="post">
 
     <div class="container">
-        <header>Login</header>
+        <header>Login
+            <a href="/users/add" class="btn btn-primary float-right btn-sm">Register</a>
+        </header>
 
         <div class="card mt-4">
             <div class="card-body">
@@ -38,12 +40,7 @@
                         <input type="password" name="password" class="form-control" id="passwordId"/>
                     </div>
                 </div>
-                <input type="submit" value="Save"/>
-                <div class="row">
-
-                    <a href="/users/add" class="form-group col-md-4">Register</a>
-
-                </div>
+                <input type="submit" class="btn btn-success btn-sm" value="Save"/>
             </div>
         </div>
     </div>

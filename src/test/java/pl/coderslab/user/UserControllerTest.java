@@ -78,12 +78,12 @@ public class UserControllerTest {
     @Test
     public void shouldDeleteUser() {
         Mockito.when(authHandler.getUser()).thenReturn(user);
-        assertEquals("redirect:/", tested.deleteUser());
+        assertEquals("redirect:/", tested.deleteUser(model));
     }
 
     @Test
     public void shouldLogout() {
-        assertEquals("redirect:/", tested.logout());
+        assertEquals("redirect:/", tested.logout(model));
     }
 
     @Test

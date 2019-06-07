@@ -84,18 +84,10 @@
 
             <ul class="navbar-nav">
                 <li class="nav-item dropdown float-right">
-                    <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink" data-toggle="dropdown"
+                    <a class="nav-link" id="navbarDropdownMenuLink" data-toggle="dropdown"
                        aria-haspopup="true" aria-expanded="false">
-                        Admin
+                        ${isLogged}
                     </a>
-                    <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                        <a class="dropdown-item" href="/owners/add">Add owner</a>
-                        <a class="dropdown-item" href="/airfields/add">Add airfield</a>
-                        <a class="dropdown-item" href="/groups/add">Add group</a>
-                        <a class="dropdown-item" href="/types/add">Add type</a>
-                        <a class="dropdown-item" href="/devices/add">Add device</a>
-                        <%--<a class="dropdown-item" data-toggle="modal" data-target="#addGroupModal">Add group</a>--%>
-                    </div>
                 </li>
                 <li class="nav-item dropdown float-right">
                     <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink" data-toggle="dropdown"
@@ -103,8 +95,16 @@
                         User
                     </a>
                     <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                        <a class="dropdown-item" href="/users/login">Login</a>
-                        <a class="dropdown-item" href="/users/add">Register</a>
+                        <c:if test="${isLogged}">
+                            <a class="dropdown-item" href="/users/logout">Logout</a>
+                            <a class="dropdown-item" href="/users/edit">Edit</a>
+                            <a class="dropdown-item" href="/users/changePassword">Change password</a>
+                        </c:if>
+
+                        <c:if test="${!isLogged}">
+                            <a class="dropdown-item" href="/users/login">Login</a>
+                            <a class="dropdown-item" href="/users/add">Register</a>
+                        </c:if>
                     </div>
                 </li>
             </ul>

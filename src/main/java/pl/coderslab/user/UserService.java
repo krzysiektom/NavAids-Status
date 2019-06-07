@@ -1,11 +1,8 @@
 package pl.coderslab.user;
 
 import org.mindrot.jbcrypt.BCrypt;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import pl.coderslab.AuthHandler;
-
-import java.util.List;
 
 @Service
 public class UserService {
@@ -31,6 +28,21 @@ public class UserService {
         authHandler.setLogged(true);
     }
 
+    public void edit(User editUser) {
+        User user = authHandler.getUser();
+        user.setEmail(editUser.getEmail());
+        user.setFirstName(editUser.getFirstName());
+        user.setLastName(editUser.getLastName());
+        userRepository.save(user);
+        authHandler.setUser(user);
+    }
+
+    void  delete(User user){
+        authHandler.setUser(null);
+        authHandler.setLogged(false);
+        userRepository.delete(user);
+    }
+
     boolean isNotExistEmail(User userValidate) {
         User user = userRepository.findByEmail(userValidate.getEmail());
         return null == user;
@@ -40,5 +52,4 @@ public class UserService {
         User user = userRepository.findByEmail(userValidate.getEmail());
         return null == user || authHandler.getUser().getId().equals(user.getId());
     }
-
 }

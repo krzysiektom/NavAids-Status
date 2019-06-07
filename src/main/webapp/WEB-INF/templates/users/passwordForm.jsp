@@ -14,10 +14,10 @@
 
 <%@include file="../fragments/header.jspf" %>
 
-<form:form method="post" modelAttribute="user">
+<form:form method="post">
 
     <div class="container">
-        <header>New user</header>
+        <header>Change password</header>
 
         <div class="card mt-4">
             <div class="card-body">
@@ -28,44 +28,28 @@
 
                 <div class="row">
                     <div class="form-group col-md-4">
-                        <label for="firstNameId">firstName:</label>
-                        <form:input path="firstName" class="form-control" id="firstNameId"/>
-                        <form:errors path="firstName" element="div" cssClass="error"/>
-                    </div>
-                </div>
-
-                <div class="row">
-                    <div class="form-group col-md-4">
-                        <label for="lastNameId">lastName:</label>
-                        <form:input path="lastName" class="form-control" id="lastNameId"/>
-                        <form:errors path="lastName" element="div" cssClass="error"/>
-                    </div>
-                </div>
-
-                <div class="row">
-                    <div class="form-group col-md-4">
-                        <label for="emailId">email:</label>
-                        <form:input path="email" class="form-control" id="emailId"/>
-                        <form:errors path="email" element="div" cssClass="error"/>
+                        <label for="current_password">Current password:</label>
+                        <input type="password" name="currentPassword" class="form-control" id="current_password"/>
                     </div>
                 </div>
                 <div class="row">
                     <div class="form-group col-md-4">
-                        <label for="passwordId">password:</label>
-                        <form:input path="password" class="form-control" id="passwordId"/>
-                        <form:errors path="password" element="div" cssClass="error"/>
+                        <label for="new_password">New password:</label>
+                        <input type="password" name="newPassword" class="form-control" id="new_password"/>
                     </div>
-
                 </div>
+                <div class="row">
+                    <div class="form-group col-md-4">
+                        <label for="confirm_password">Confirm password:</label>
+                        <input type="password" name="confirmPassword" class="form-control" id="confirm_password"/>
+                    </div>
+                </div>
+
                 <input type="submit" class="btn btn-success btn-sm" value="Save"/>
-
             </div>
         </div>
     </div>
 </form:form>
-
-
-
 
 
 </body>

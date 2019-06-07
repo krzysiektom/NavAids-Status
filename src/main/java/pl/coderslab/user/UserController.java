@@ -1,8 +1,10 @@
 package pl.coderslab.user;
 
+import org.mindrot.jbcrypt.BCrypt;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import pl.coderslab.AuthHandler;
 
@@ -10,6 +12,7 @@ import javax.validation.Valid;
 
 @Controller
 @RequestMapping("/users")
+@SessionAttributes({"userSession", "isLogged"})
 public class UserController {
     private final UserService userService;
     private final AuthHandler authHandler;
@@ -36,7 +39,7 @@ public class UserController {
         if (userService.isNotExistEmail(user)) {
             userRepository.save(user);
             userService.setSession(user);
-            return "redirect:/tweet/main";//???
+            return "redirect:/";
         } else {
             model.addAttribute("error", true);
             model.addAttribute("errorMsg", "User with this email exists");
@@ -48,37 +51,39 @@ public class UserController {
     public String editForm(Model model) {
         User user = authHandler.getUser();
         model.addAttribute("user", user);
-        return "users/userForm";
+        return "users/userEditForm";
     }
 
     @PostMapping("/edit")
-    public String editUser(@ModelAttribute("user") @Valid User user, BindingResult result, Model model) {
+    public String editUser(@ModelAttribute("user") @Validated(ValidationEditUser.class) User user, BindingResult result, Model model) {
         if (result.hasErrors()) {
-            return "users/userForm";
+            return "users/userEditForm";
         }
         if (userService.isNotExistAnotherUserWithEmail(user)) {
-            user.setId(authHandler.getUser().getId());
-            userRepository.save(user);
-            userService.setSession(user);
-            return "redirect:/tweet/main";//??
+            userService.edit(user);
+            model.addAttribute("userSession", authHandler.getUser());
+            return "redirect:/";
         } else {
             model.addAttribute("error", true);
             model.addAttribute("errorMsg", "User with this email exists");
-            return "users/userForm";
+            return "users/userEditForm";
         }
     }
 
     @GetMapping("/delete")
-    public String deleteUser() {
+    public String deleteUser(Model model) {
         if (authHandler.isLogged()) {
-            userRepository.delete(authHandler.getUser());
+            userService.delete(authHandler.getUser());
+            model.addAttribute("isLogged", authHandler.isLogged());
+            model.addAttribute("userSession", authHandler.getUser());
         }
         return "redirect:/";
     }
 
     @GetMapping("/logout")
-    public String logout() {
+    public String logout(Model model) {
         authHandler.setLogged(false);
+        model.addAttribute("isLogged", authHandler.isLogged());
         return "redirect:/";
     }
 
@@ -90,7 +95,9 @@ public class UserController {
     @PostMapping("/login")
     public String loginUser(@RequestParam("email") String email, @RequestParam("password") String password, Model model) {
         if (userService.validateUserAndSetSession(email, password)) {
-            return "redirect:/tweet/main";//??
+            model.addAttribute("isLogged", authHandler.isLogged());
+            model.addAttribute("userSession", authHandler.getUser());
+            return "redirect:/";
         } else {
             model.addAttribute("error", true);
             model.addAttribute("errorMsg", "Wrong login or password");
@@ -98,4 +105,24 @@ public class UserController {
         }
     }
 
+    @GetMapping("/changePassword")
+    public String passwordForm() {
+        return "users/passwordForm";
+    }
+
+    @PostMapping("/changePassword")
+    public String loginUser(@RequestParam("currentPassword") String currentPassword, @RequestParam("newPassword") String newPassword, @RequestParam("confirmPassword") String confirmPassword, Model model) {
+        User user = authHandler.getUser();
+        if (BCrypt.checkpw(currentPassword, user.getPassword()) && newPassword.equals(confirmPassword) && newPassword.length() > 0) {
+            user.setPassword(newPassword);
+            userRepository.save(user);
+            authHandler.setUser(user);
+            model.addAttribute("userSession", user);
+            return "redirect:/";
+        } else {
+            model.addAttribute("error", true);
+            model.addAttribute("errorMsg", "Wrong password");
+            return "users/passwordForm";
+        }
+    }
 }

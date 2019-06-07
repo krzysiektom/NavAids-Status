@@ -17,7 +17,7 @@
 <form:form method="post" modelAttribute="user">
 
     <div class="container">
-        <header>New user</header>
+        <header>Edit user</header>
 
         <div class="card mt-4">
             <div class="card-body">
@@ -51,8 +51,6 @@
                 </div>
                 <div class="row">
                     <div class="form-group col-md-4">
-                        <label for="passwordId">password:</label>
-                        <form:input path="password" class="form-control" id="passwordId"/>
                         <form:errors path="password" element="div" cssClass="error"/>
                     </div>
 
