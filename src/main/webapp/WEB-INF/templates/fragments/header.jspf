@@ -86,8 +86,7 @@
                         <c:choose>
                             <c:when test="${isLogged}">
                                 <a class="dropdown-item" href="/users/logout">Logout</a>
-                                <a class="dropdown-item" href="/users/edit">Edit</a>
-                                <a class="dropdown-item" href="/users/changePassword">Change password</a>
+                                <a class="dropdown-item" href="/users/details">User details</a>
                             </c:when>
                             <c:otherwise>
                                 <a class="dropdown-item" href="/users/login">Login</a>

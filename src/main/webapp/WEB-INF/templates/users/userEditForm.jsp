@@ -49,12 +49,7 @@
                         <form:errors path="email" element="div" cssClass="error"/>
                     </div>
                 </div>
-                <div class="row">
-                    <div class="form-group col-md-4">
-                        <form:errors path="password" element="div" cssClass="error"/>
-                    </div>
-
-                </div>
+                <a href="/users/details" class="btn btn-primary btn-sm" >Close</a>
                 <input type="submit" class="btn btn-success btn-sm" value="Save"/>
 
             </div>

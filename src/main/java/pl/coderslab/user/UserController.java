@@ -125,4 +125,11 @@ public class UserController {
             return "users/passwordForm";
         }
     }
+
+    @GetMapping("/details")
+    public String userDetails(Model model) {
+        model.addAttribute("user",authHandler.getUser());
+        return "users/userDetails";
+    }
+
 }
