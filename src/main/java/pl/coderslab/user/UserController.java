@@ -39,7 +39,9 @@ public class UserController {
         if (userService.isNotExistEmail(user)) {
             userRepository.save(user);
             userService.setSession(user);
-            return "redirect:/";
+            model.addAttribute("userSession", authHandler.getUser());
+            model.addAttribute("isLogged", authHandler.isLogged());
+            return "redirect:/devices/pivotTable";
         } else {
             model.addAttribute("error", true);
             model.addAttribute("errorMsg", "User with this email exists");
@@ -62,7 +64,7 @@ public class UserController {
         if (userService.isNotExistAnotherUserWithEmail(user)) {
             userService.edit(user);
             model.addAttribute("userSession", authHandler.getUser());
-            return "redirect:/";
+            return "redirect:/users/details";
         } else {
             model.addAttribute("error", true);
             model.addAttribute("errorMsg", "User with this email exists");
