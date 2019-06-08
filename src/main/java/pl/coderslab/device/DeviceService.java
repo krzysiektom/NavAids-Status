@@ -33,16 +33,41 @@ public class DeviceService {
     @Autowired
     private GroupRepository groupRepository;
 
+    public List<Device> devicesByGroup(Long idGroup){
+        return deviceRepository.findAllByTypeIn(typeRepository.findAllByGroup(groupRepository.findOne(idGroup)));
+    }
+
+    public List<Device> devicesByGroupAndReady(Long idGroup){
+        return deviceRepository.findAllByTypeInAndReady(typeRepository.findAllByGroup(groupRepository.findOne(idGroup)),true);
+    }
+
+    public List<Device> devicesByGroupAndUnderService(Long idGroup){
+        return deviceRepository.findAllByTypeInAndReady(typeRepository.findAllByGroup(groupRepository.findOne(idGroup)),false);
+    }
+
+    public List<Device> devicesByGroupAndAirfield(Long idGroup, Long idAirfield){
+        return deviceRepository.findAllByTypeInAndAirfield(typeRepository.findAllByGroup(groupRepository.findOne(idGroup)),airfieldRepository.findOne(idAirfield));
+    }
+
+    public List<Device> devicesByGroupAndAirfieldAndReady(Long idGroup, Long idAirfield){
+        return deviceRepository.findAllByTypeInAndAirfieldAndReady(typeRepository.findAllByGroup(groupRepository.findOne(idGroup)),airfieldRepository.findOne(idAirfield),true);
+    }
+
+    public List<Device> devicesByGroupAndAirfieldAndUnderService(Long idGroup, Long idAirfield){
+        return deviceRepository.findAllByTypeInAndAirfieldAndReady(typeRepository.findAllByGroup(groupRepository.findOne(idGroup)),airfieldRepository.findOne(idAirfield),false);
+    }
+
+
+
+
     public List<DevicesByOwner> groupByOwner() {
         List<Owner> owners = ownerService.findAllOwners();
         List<Device> devices = deviceRepository.findAll();
 
         return owners.stream()
                 .map(owner -> new DevicesByOwner(
-                                owner,
-                                devices.stream().filter(device -> device.getOwner().equals(owner)).collect(Collectors.toList())
-                        )
-                )
+                        owner,
+                        devices.stream().filter(device -> device.getOwner().equals(owner)).collect(Collectors.toList())))
                 .collect(Collectors.toList());
     }
 

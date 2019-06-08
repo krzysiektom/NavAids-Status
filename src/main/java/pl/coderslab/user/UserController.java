@@ -97,7 +97,7 @@ public class UserController {
         if (userService.validateUserAndSetSession(email, password)) {
             model.addAttribute("isLogged", authHandler.isLogged());
             model.addAttribute("userSession", authHandler.getUser());
-            return "redirect:/";
+            return "redirect:/devices/pivotTable";
         } else {
             model.addAttribute("error", true);
             model.addAttribute("errorMsg", "Wrong login or password");

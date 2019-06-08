@@ -17,7 +17,7 @@
 
 <div class="container">
 
-    <header>Pivot table</header>
+    <header>Main page</header>
 
 
     <div class="card mt-4">
@@ -53,9 +53,30 @@
                             <a href="/devices/airfield/${pT.airfield.id}">${pT.airfield.abbr}</a>
                         </td>
                         <c:forEach items="${pT.devicesCountByAirfieldAndGroups}" var="device">
-                            <td class="text-center">${device.count}</td>
-                            <td class="text-center">${device.ready}</td>
-                            <td class="text-center">${device.underService}</td>
+                            <td class="text-center">
+                                <c:if test="${device.count!=0}">
+                                    <a href="/devices/detail/${device.group.id}/${device.airfield.id}">${device.count}</a>
+                                </c:if>
+                                <c:if test="${device.count==0}">
+                                    <a>${device.count}</a>
+                                </c:if>
+                            </td>
+                            <td class="text-center">
+                                <c:if test="${device.ready!=0}">
+                                    <a href="/devices/detail/ready/${device.group.id}/${device.airfield.id}">${device.ready}</a>
+                                </c:if>
+                                <c:if test="${device.ready==0}">
+                                    <a>${device.ready}</a>
+                                </c:if>
+                            </td>
+                            <td class="text-center">
+                                <c:if test="${device.underService!=0}">
+                                    <a href="/devices/detail/under/${device.group.id}/${device.airfield.id}">${device.underService}</a>
+                                </c:if>
+                                <c:if test="${device.underService==0}">
+                                    <a>${device.underService}</a>
+                                </c:if>
+                            </td>
                         </c:forEach>
                     </tr>
 
@@ -63,9 +84,20 @@
                 <tr>
                     <th colspan="3" class="text-right">Total</th>
                     <c:forEach items="${sums}" var="sum">
-                        <th class="text-center">${sum.count}</th>
-                        <th class="text-center">${sum.ready}</th>
-                        <th class="text-center">${sum.underService}</th>
+                        <th class="text-center">
+                            <a href="/devices/total/${sum.group.id}">${sum.count}</a>
+                        </th>
+                        <th class="text-center">
+                            <a href="/devices/total/ready/${sum.group.id}">${sum.ready}</a>
+                        </th>
+                        <th class="text-center">
+                            <c:if test="${sum.underService!=0}">
+                                <a href="/devices/total/under/${sum.group.id}">${sum.underService}</a>
+                            </c:if>
+                            <c:if test="${sum.underService==0}">
+                                <a>${sum.underService}</a>
+                            </c:if>
+                        </th>
                     </c:forEach>
                 </tr>
 

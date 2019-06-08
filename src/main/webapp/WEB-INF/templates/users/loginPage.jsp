@@ -40,7 +40,7 @@
                         <input type="password" name="password" class="form-control" id="passwordId"/>
                     </div>
                 </div>
-                <input type="submit" class="btn btn-success btn-sm" value="Save"/>
+                <input type="submit" class="btn btn-success btn-sm" value="Login"/>
             </div>
         </div>
     </div>

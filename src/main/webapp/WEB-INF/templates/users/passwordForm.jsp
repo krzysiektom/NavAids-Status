@@ -44,7 +44,7 @@
                         <input type="password" name="confirmPassword" class="form-control" id="confirm_password"/>
                     </div>
                 </div>
-
+                <a href="/users/details" class="btn btn-primary btn-sm" >Close</a>
                 <input type="submit" class="btn btn-success btn-sm" value="Save"/>
             </div>
         </div>

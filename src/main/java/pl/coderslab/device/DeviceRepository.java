@@ -44,4 +44,10 @@ public interface DeviceRepository extends JpaRepository<Device, Long> {
     List<Device> findAllByAirfield(Airfield airfield);
 
     List<Device> findAllByAirfieldIn(List<Airfield> airfields);
+
+    List<Device> findAllByTypeInAndReady(List<Type> types, Boolean a);
+
+    List<Device> findAllByTypeInAndAirfield(List<Type> types, Airfield airfield);
+
+    List<Device> findAllByTypeInAndAirfieldAndReady(List<Type> types, Airfield airfield, Boolean a);
 }

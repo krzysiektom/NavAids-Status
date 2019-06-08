@@ -187,4 +187,40 @@ public class DeviceController {
         model.addAttribute("sums", deviceService.countByGroup());
         return "devices/pivotTableDevicesByTypesAndOwners";
     }
+
+    @GetMapping("/total/{idGroup}")
+    public String totalDevicesByGroup(@PathVariable Long idGroup, Model model) {
+        model.addAttribute("allDevices", deviceService.devicesByGroup(idGroup));
+        return "devices/allDevices";
+    }
+
+    @GetMapping("/total/ready/{idGroup}")
+    public String totalDevicesByGroupAndReady(@PathVariable Long idGroup, Model model) {
+        model.addAttribute("allDevices", deviceService.devicesByGroupAndReady(idGroup));
+        return "devices/allDevices";
+    }
+
+    @GetMapping("/total/under/{idGroup}")
+    public String totalDevicesByGroupAndUnder(@PathVariable Long idGroup, Model model) {
+        model.addAttribute("allDevices", deviceService.devicesByGroupAndUnderService(idGroup));
+        return "devices/allDevices";
+    }
+
+    @GetMapping("/detail/{idGroup}/{idAirfield}")
+    public String devicesByGroupAndAirfield(@PathVariable Long idGroup, @PathVariable Long idAirfield, Model model) {
+        model.addAttribute("allDevices", deviceService.devicesByGroupAndAirfield(idGroup, idAirfield));
+        return "devices/allDevices";
+    }
+
+    @GetMapping("/detail/ready/{idGroup}/{idAirfield}")
+    public String devicesByGroupAndAirfieldAndReady(@PathVariable Long idGroup, @PathVariable Long idAirfield, Model model) {
+        model.addAttribute("allDevices", deviceService.devicesByGroupAndAirfieldAndReady(idGroup, idAirfield));
+        return "devices/allDevices";
+    }
+
+    @GetMapping("/detail/under/{idGroup}/{idAirfield}")
+    public String devicesByGroupAndAirfieldAndUnder(@PathVariable Long idGroup, @PathVariable Long idAirfield, Model model) {
+        model.addAttribute("allDevices", deviceService.devicesByGroupAndAirfieldAndUnderService(idGroup, idAirfield));
+        return "devices/allDevices";
+    }
 }
