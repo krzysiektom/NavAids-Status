@@ -1,0 +1,6 @@
+# IntelliJ project files
+.idea
+*.iml
+src/main/java/pl/coderslab/todo.txt
+src/main/resources/
+target/
