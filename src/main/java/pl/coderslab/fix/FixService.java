@@ -16,16 +16,17 @@ public class FixService {
     private final FixRepository fixRepository;
     private final FailureRepository failureRepository;
     private final AuthHandler authHandler;
-    private final DeviceRepository deviceRepository;
+//    private final DeviceRepository deviceRepository;
 
-    public FixService(FixRepository fixRepository, FailureRepository failureRepository, AuthHandler authHandler, DeviceRepository deviceRepository) {
+    public FixService(FixRepository fixRepository, FailureRepository failureRepository, AuthHandler authHandler) {
         this.fixRepository = fixRepository;
         this.failureRepository = failureRepository;
         this.authHandler = authHandler;
-        this.deviceRepository = deviceRepository;
     }
 
     public void save(Fix fix, Long failureId, boolean isRepaired) {
+        // tu entity menager zaczyna transakcję
+        // wszystkie encje które znajdujemy są aktualizowane
         Failure failure = failureRepository.findOne(failureId);
         fix.setFailure(failure);
         fix.setUser(authHandler.getUser());
@@ -33,10 +34,12 @@ public class FixService {
         if (isRepaired) {
             failure.setFixed(true);
             failure.setFinished(LocalDateTime.now());
-            failureRepository.save(failure);
+//            failureRepository.save(failure);
             Device device = failure.getDevice();
             device.setReady(true);
-            deviceRepository.save(device);
+//            deviceRepository.save(device);
         }
+        // koniec transakcji
+        // zapiszą sie zmiany na wyszukanych encjach
     }
 }
